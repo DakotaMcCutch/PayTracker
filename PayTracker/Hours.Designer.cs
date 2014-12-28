@@ -1,6 +1,6 @@
 ﻿namespace PayTracker
 {
-    partial class Form1
+    partial class Hours
     {
         /// <summary>
         /// Required designer variable.
@@ -34,6 +34,10 @@
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.lblFinish = new System.Windows.Forms.Label();
             this.dtpFinish = new System.Windows.Forms.DateTimePicker();
+            this.cmdUpdate = new System.Windows.Forms.Button();
+            this.cmdDelete = new System.Windows.Forms.Button();
+            this.cmdInsert = new System.Windows.Forms.Button();
+            this.cmdBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblDate
@@ -85,21 +89,69 @@
             this.dtpFinish.Size = new System.Drawing.Size(145, 20);
             this.dtpFinish.TabIndex = 5;
             // 
-            // Form1
+            // cmdUpdate
+            // 
+            this.cmdUpdate.BackColor = System.Drawing.Color.Yellow;
+            this.cmdUpdate.Location = new System.Drawing.Point(396, 283);
+            this.cmdUpdate.Name = "cmdUpdate";
+            this.cmdUpdate.Size = new System.Drawing.Size(167, 57);
+            this.cmdUpdate.TabIndex = 48;
+            this.cmdUpdate.Text = "Update";
+            this.cmdUpdate.UseVisualStyleBackColor = false;
+            this.cmdUpdate.Click += new System.EventHandler(this.cmdUpdate_Click);
+            // 
+            // cmdDelete
+            // 
+            this.cmdDelete.BackColor = System.Drawing.Color.Red;
+            this.cmdDelete.Location = new System.Drawing.Point(569, 283);
+            this.cmdDelete.Name = "cmdDelete";
+            this.cmdDelete.Size = new System.Drawing.Size(167, 57);
+            this.cmdDelete.TabIndex = 49;
+            this.cmdDelete.Text = "Delete";
+            this.cmdDelete.UseVisualStyleBackColor = false;
+            this.cmdDelete.Click += new System.EventHandler(this.cmdDelete_Click);
+            // 
+            // cmdInsert
+            // 
+            this.cmdInsert.BackColor = System.Drawing.Color.GreenYellow;
+            this.cmdInsert.Location = new System.Drawing.Point(223, 283);
+            this.cmdInsert.Name = "cmdInsert";
+            this.cmdInsert.Size = new System.Drawing.Size(167, 57);
+            this.cmdInsert.TabIndex = 47;
+            this.cmdInsert.Text = "Insert";
+            this.cmdInsert.UseVisualStyleBackColor = false;
+            this.cmdInsert.Click += new System.EventHandler(this.cmdInsert_Click);
+            // 
+            // cmdBack
+            // 
+            this.cmdBack.BackColor = System.Drawing.Color.Tomato;
+            this.cmdBack.Location = new System.Drawing.Point(12, 283);
+            this.cmdBack.Name = "cmdBack";
+            this.cmdBack.Size = new System.Drawing.Size(58, 57);
+            this.cmdBack.TabIndex = 50;
+            this.cmdBack.Text = "Go Back";
+            this.cmdBack.UseVisualStyleBackColor = false;
+            this.cmdBack.Click += new System.EventHandler(this.cmdBack_Click);
+            // 
+            // Hours
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(691, 439);
+            this.ClientSize = new System.Drawing.Size(745, 352);
+            this.Controls.Add(this.cmdBack);
+            this.Controls.Add(this.cmdUpdate);
+            this.Controls.Add(this.cmdDelete);
+            this.Controls.Add(this.cmdInsert);
             this.Controls.Add(this.dtpFinish);
             this.Controls.Add(this.lblFinish);
             this.Controls.Add(this.dtpStart);
             this.Controls.Add(this.lblStart);
             this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.lblDate);
-            this.Name = "Form1";
+            this.Name = "Hours";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Text = "Hours Entry";
+            this.Load += new System.EventHandler(this.Hours_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -113,6 +165,10 @@
         private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.Label lblFinish;
         private System.Windows.Forms.DateTimePicker dtpFinish;
+        private System.Windows.Forms.Button cmdUpdate;
+        private System.Windows.Forms.Button cmdDelete;
+        private System.Windows.Forms.Button cmdInsert;
+        private System.Windows.Forms.Button cmdBack;
     }
 }
 
