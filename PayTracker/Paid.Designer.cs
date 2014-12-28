@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblStart = new System.Windows.Forms.Label();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.lblDate = new System.Windows.Forms.Label();
@@ -36,6 +37,10 @@
             this.cmdDelete = new System.Windows.Forms.Button();
             this.cmdInsert = new System.Windows.Forms.Button();
             this.txtAmount = new System.Windows.Forms.TextBox();
+            this.dg1 = new System.Windows.Forms.DataGridView();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.dg1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblStart
@@ -114,11 +119,23 @@
             this.txtAmount.Size = new System.Drawing.Size(148, 20);
             this.txtAmount.TabIndex = 55;
             // 
+            // dg1
+            // 
+            this.dg1.AllowUserToAddRows = false;
+            this.dg1.AllowUserToDeleteRows = false;
+            this.dg1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg1.Location = new System.Drawing.Point(223, 13);
+            this.dg1.Name = "dg1";
+            this.dg1.ReadOnly = true;
+            this.dg1.Size = new System.Drawing.Size(513, 264);
+            this.dg1.TabIndex = 56;
+            // 
             // Paid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(745, 352);
+            this.Controls.Add(this.dg1);
             this.Controls.Add(this.txtAmount);
             this.Controls.Add(this.cmdBack);
             this.Controls.Add(this.cmdUpdate);
@@ -131,6 +148,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Paid";
             this.Load += new System.EventHandler(this.Paid_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dg1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,5 +165,7 @@
         private System.Windows.Forms.Button cmdDelete;
         private System.Windows.Forms.Button cmdInsert;
         private System.Windows.Forms.TextBox txtAmount;
+        private System.Windows.Forms.DataGridView dg1;
+        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
