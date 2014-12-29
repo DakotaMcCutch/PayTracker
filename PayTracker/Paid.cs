@@ -55,6 +55,7 @@ namespace PayTracker
 
         private void cmdDelete_Click(object sender, EventArgs e)
         {
+
         }
 
         private void Paid_FormClosing(object sender, FormClosingEventArgs e)

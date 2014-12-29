@@ -39,7 +39,7 @@
             this.cmdDelete = new System.Windows.Forms.Button();
             this.cmdInsert = new System.Windows.Forms.Button();
             this.cmdBack = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cmdImport = new System.Windows.Forms.Button();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dg1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -139,26 +139,29 @@
             this.cmdBack.UseVisualStyleBackColor = false;
             this.cmdBack.Click += new System.EventHandler(this.cmdBack_Click);
             // 
-            // button1
+            // cmdImport
             // 
-            this.button1.Location = new System.Drawing.Point(98, 300);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 51;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.cmdImport.Location = new System.Drawing.Point(76, 317);
+            this.cmdImport.Name = "cmdImport";
+            this.cmdImport.Size = new System.Drawing.Size(141, 23);
+            this.cmdImport.TabIndex = 51;
+            this.cmdImport.Text = "Import From File";
+            this.cmdImport.UseVisualStyleBackColor = true;
+            this.cmdImport.Click += new System.EventHandler(this.button1_Click);
             // 
             // dg1
             // 
             this.dg1.AllowUserToAddRows = false;
             this.dg1.AllowUserToDeleteRows = false;
+            this.dg1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dg1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dg1.Location = new System.Drawing.Point(223, 13);
             this.dg1.Name = "dg1";
             this.dg1.ReadOnly = true;
+            this.dg1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dg1.Size = new System.Drawing.Size(510, 264);
             this.dg1.TabIndex = 52;
+            this.dg1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg1_CellContentClick);
             // 
             // Hours
             // 
@@ -166,7 +169,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(745, 352);
             this.Controls.Add(this.dg1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cmdImport);
             this.Controls.Add(this.cmdBack);
             this.Controls.Add(this.cmdUpdate);
             this.Controls.Add(this.cmdDelete);
@@ -200,7 +203,7 @@
         private System.Windows.Forms.Button cmdDelete;
         private System.Windows.Forms.Button cmdInsert;
         private System.Windows.Forms.Button cmdBack;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cmdImport;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.DataGridView dg1;
     }
