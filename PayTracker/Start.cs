@@ -16,6 +16,7 @@ namespace PayTracker
         {
             FormClosing += Start_FormClosing;
             cbTheme.SelectedValueChanged += cbTheme_SelectedValueChanged;
+            cbTheme.SelectedItem = Properties.Settings.Default.lastSelect;
             setTheme();
         }
 
@@ -41,27 +42,28 @@ namespace PayTracker
                  Properties.Settings.Default.selectionCellFore = Color.Yellow;
                 Properties.Settings.Default.Save();
             }
-            else if (cbTheme.SelectedItem == "Normal")
+            if (cbTheme.SelectedItem.ToString() == "Normal")
             {
-                Properties.Settings.Default.backColor = default(Color);
-                Properties.Settings.Default.foreColor = default(Color);
+                Properties.Settings.Default.backColor = SystemColors.Control;
+                Properties.Settings.Default.foreColor = SystemColors.ControlText;
                 Properties.Settings.Default.lastSelect = cbTheme.SelectedItem.ToString();
-                Properties.Settings.Default.buttonForeColor = default(Color);
-                Properties.Settings.Default.headerBack = default(Color);
-                Properties.Settings.Default.headerFore = default(Color);
-                Properties.Settings.Default.selectionHeaderBack = default(Color);
-                Properties.Settings.Default.selectionHeaderFore = default(Color);
-                Properties.Settings.Default.cellBack = default(Color);
-                Properties.Settings.Default.cellFore = default(Color);
-                Properties.Settings.Default.selectionCellBack = default(Color);
-                Properties.Settings.Default.selectionCellFore = default(Color);
+                Properties.Settings.Default.buttonForeColor = SystemColors.ControlText;
+                Properties.Settings.Default.headerBack = SystemColors.Control;
+                Properties.Settings.Default.headerFore = SystemColors.ControlText;
+                Properties.Settings.Default.selectionHeaderBack = SystemColors.Highlight;
+                Properties.Settings.Default.selectionHeaderFore = SystemColors.HighlightText;
+                Properties.Settings.Default.cellBack = SystemColors.Window;
+                Properties.Settings.Default.cellFore = SystemColors.ControlText;
+                Properties.Settings.Default.selectionCellBack = SystemColors.Highlight;
+                Properties.Settings.Default.selectionCellFore = SystemColors.HighlightText;
                 Properties.Settings.Default.Save();
             }
-            cbTheme.SelectedItem = Properties.Settings.Default.lastSelect;
+           
             this.BackColor = Properties.Settings.Default.backColor;
             this.ForeColor = Properties.Settings.Default.foreColor;
-            cmdHours.ForeColor = Color.Black;
-            cmdPaid.ForeColor = Color.Black;
+            cmdHours.ForeColor = SystemColors.ControlText;
+            cmdPaid.ForeColor = SystemColors.ControlText;
+            Properties.Settings.Default.Save();
         }
         private void Start_FormClosing(object sender, FormClosingEventArgs e)
         {

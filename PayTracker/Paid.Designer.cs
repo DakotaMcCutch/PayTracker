@@ -39,6 +39,7 @@
             this.txtAmount = new System.Windows.Forms.TextBox();
             this.dg1 = new System.Windows.Forms.DataGridView();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.lblInsertMessage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dg1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -71,7 +72,7 @@
             // cmdBack
             // 
             this.cmdBack.BackColor = System.Drawing.Color.Tomato;
-            this.cmdBack.Location = new System.Drawing.Point(12, 283);
+            this.cmdBack.Location = new System.Drawing.Point(11, 311);
             this.cmdBack.Name = "cmdBack";
             this.cmdBack.Size = new System.Drawing.Size(58, 57);
             this.cmdBack.TabIndex = 54;
@@ -82,7 +83,7 @@
             // cmdUpdate
             // 
             this.cmdUpdate.BackColor = System.Drawing.Color.Yellow;
-            this.cmdUpdate.Location = new System.Drawing.Point(396, 283);
+            this.cmdUpdate.Location = new System.Drawing.Point(395, 311);
             this.cmdUpdate.Name = "cmdUpdate";
             this.cmdUpdate.Size = new System.Drawing.Size(167, 57);
             this.cmdUpdate.TabIndex = 52;
@@ -93,7 +94,7 @@
             // cmdDelete
             // 
             this.cmdDelete.BackColor = System.Drawing.Color.Red;
-            this.cmdDelete.Location = new System.Drawing.Point(569, 283);
+            this.cmdDelete.Location = new System.Drawing.Point(568, 311);
             this.cmdDelete.Name = "cmdDelete";
             this.cmdDelete.Size = new System.Drawing.Size(167, 57);
             this.cmdDelete.TabIndex = 53;
@@ -104,7 +105,7 @@
             // cmdInsert
             // 
             this.cmdInsert.BackColor = System.Drawing.Color.GreenYellow;
-            this.cmdInsert.Location = new System.Drawing.Point(223, 283);
+            this.cmdInsert.Location = new System.Drawing.Point(222, 311);
             this.cmdInsert.Name = "cmdInsert";
             this.cmdInsert.Size = new System.Drawing.Size(167, 57);
             this.cmdInsert.TabIndex = 51;
@@ -123,18 +124,31 @@
             // 
             this.dg1.AllowUserToAddRows = false;
             this.dg1.AllowUserToDeleteRows = false;
+            this.dg1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dg1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg1.EnableHeadersVisualStyles = false;
             this.dg1.Location = new System.Drawing.Point(223, 13);
+            this.dg1.MultiSelect = false;
             this.dg1.Name = "dg1";
             this.dg1.ReadOnly = true;
+            this.dg1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dg1.Size = new System.Drawing.Size(513, 264);
             this.dg1.TabIndex = 56;
+            // 
+            // lblInsertMessage
+            // 
+            this.lblInsertMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInsertMessage.Location = new System.Drawing.Point(343, 285);
+            this.lblInsertMessage.Name = "lblInsertMessage";
+            this.lblInsertMessage.Size = new System.Drawing.Size(390, 23);
+            this.lblInsertMessage.TabIndex = 70;
             // 
             // Paid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(745, 352);
+            this.ClientSize = new System.Drawing.Size(745, 380);
+            this.Controls.Add(this.lblInsertMessage);
             this.Controls.Add(this.dg1);
             this.Controls.Add(this.txtAmount);
             this.Controls.Add(this.cmdBack);
@@ -167,5 +181,6 @@
         private System.Windows.Forms.TextBox txtAmount;
         private System.Windows.Forms.DataGridView dg1;
         private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.Label lblInsertMessage;
     }
 }

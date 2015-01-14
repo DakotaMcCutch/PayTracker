@@ -156,6 +156,8 @@
             // 
             this.dg1.AllowUserToAddRows = false;
             this.dg1.AllowUserToDeleteRows = false;
+            this.dg1.AllowUserToResizeColumns = false;
+            this.dg1.AllowUserToResizeRows = false;
             this.dg1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dg1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dg1.EnableHeadersVisualStyles = false;
