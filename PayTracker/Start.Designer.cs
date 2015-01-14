@@ -31,6 +31,8 @@
             this.cmdPaid = new System.Windows.Forms.Button();
             this.cmdHours = new System.Windows.Forms.Button();
             this.lblTop = new System.Windows.Forms.Label();
+            this.cbTheme = new System.Windows.Forms.ComboBox();
+            this.lblTheme = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cmdPaid
@@ -65,11 +67,35 @@
             this.lblTop.Text = "Please select the mode that you want to enter";
             this.lblTop.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // cbTheme
+            // 
+            this.cbTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTheme.FormattingEnabled = true;
+            this.cbTheme.Items.AddRange(new object[] {
+            "Normal",
+            "Dark"});
+            this.cbTheme.Location = new System.Drawing.Point(116, 243);
+            this.cbTheme.Name = "cbTheme";
+            this.cbTheme.Size = new System.Drawing.Size(121, 21);
+            this.cbTheme.TabIndex = 57;
+            // 
+            // lblTheme
+            // 
+            this.lblTheme.AutoSize = true;
+            this.lblTheme.Location = new System.Drawing.Point(58, 246);
+            this.lblTheme.Name = "lblTheme";
+            this.lblTheme.Size = new System.Drawing.Size(46, 13);
+            this.lblTheme.TabIndex = 58;
+            this.lblTheme.Text = "Theme :";
+            // 
             // Start
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 262);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(357, 276);
+            this.Controls.Add(this.lblTheme);
+            this.Controls.Add(this.cbTheme);
             this.Controls.Add(this.cmdPaid);
             this.Controls.Add(this.cmdHours);
             this.Controls.Add(this.lblTop);
@@ -78,6 +104,7 @@
             this.Text = "Start";
             this.Load += new System.EventHandler(this.Start_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -86,5 +113,7 @@
         private System.Windows.Forms.Button cmdPaid;
         private System.Windows.Forms.Button cmdHours;
         private System.Windows.Forms.Label lblTop;
+        private System.Windows.Forms.ComboBox cbTheme;
+        private System.Windows.Forms.Label lblTheme;
     }
 }

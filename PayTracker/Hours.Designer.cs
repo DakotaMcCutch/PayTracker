@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblDate = new System.Windows.Forms.Label();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.lblStart = new System.Windows.Forms.Label();
@@ -42,6 +43,7 @@
             this.cmdImport = new System.Windows.Forms.Button();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dg1 = new System.Windows.Forms.DataGridView();
+            this.lblInsertMessage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg1)).BeginInit();
             this.SuspendLayout();
@@ -77,7 +79,7 @@
             this.dtpStart.Location = new System.Drawing.Point(13, 74);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.Size = new System.Drawing.Size(148, 20);
-            this.dtpStart.TabIndex = 3;
+            this.dtpStart.TabIndex = 2;
             // 
             // lblFinish
             // 
@@ -93,15 +95,15 @@
             this.dtpFinish.Location = new System.Drawing.Point(16, 118);
             this.dtpFinish.Name = "dtpFinish";
             this.dtpFinish.Size = new System.Drawing.Size(145, 20);
-            this.dtpFinish.TabIndex = 5;
+            this.dtpFinish.TabIndex = 3;
             // 
             // cmdUpdate
             // 
             this.cmdUpdate.BackColor = System.Drawing.Color.Yellow;
-            this.cmdUpdate.Location = new System.Drawing.Point(396, 283);
+            this.cmdUpdate.Location = new System.Drawing.Point(395, 311);
             this.cmdUpdate.Name = "cmdUpdate";
             this.cmdUpdate.Size = new System.Drawing.Size(167, 57);
-            this.cmdUpdate.TabIndex = 48;
+            this.cmdUpdate.TabIndex = 5;
             this.cmdUpdate.Text = "Update";
             this.cmdUpdate.UseVisualStyleBackColor = false;
             this.cmdUpdate.Click += new System.EventHandler(this.cmdUpdate_Click);
@@ -109,10 +111,10 @@
             // cmdDelete
             // 
             this.cmdDelete.BackColor = System.Drawing.Color.Red;
-            this.cmdDelete.Location = new System.Drawing.Point(569, 283);
+            this.cmdDelete.Location = new System.Drawing.Point(568, 311);
             this.cmdDelete.Name = "cmdDelete";
             this.cmdDelete.Size = new System.Drawing.Size(167, 57);
-            this.cmdDelete.TabIndex = 49;
+            this.cmdDelete.TabIndex = 6;
             this.cmdDelete.Text = "Delete";
             this.cmdDelete.UseVisualStyleBackColor = false;
             this.cmdDelete.Click += new System.EventHandler(this.cmdDelete_Click);
@@ -120,10 +122,10 @@
             // cmdInsert
             // 
             this.cmdInsert.BackColor = System.Drawing.Color.GreenYellow;
-            this.cmdInsert.Location = new System.Drawing.Point(223, 283);
+            this.cmdInsert.Location = new System.Drawing.Point(222, 311);
             this.cmdInsert.Name = "cmdInsert";
             this.cmdInsert.Size = new System.Drawing.Size(167, 57);
-            this.cmdInsert.TabIndex = 47;
+            this.cmdInsert.TabIndex = 4;
             this.cmdInsert.Text = "Insert";
             this.cmdInsert.UseVisualStyleBackColor = false;
             this.cmdInsert.Click += new System.EventHandler(this.cmdInsert_Click);
@@ -131,22 +133,23 @@
             // cmdBack
             // 
             this.cmdBack.BackColor = System.Drawing.Color.Tomato;
-            this.cmdBack.Location = new System.Drawing.Point(12, 283);
+            this.cmdBack.Location = new System.Drawing.Point(11, 311);
             this.cmdBack.Name = "cmdBack";
             this.cmdBack.Size = new System.Drawing.Size(58, 57);
-            this.cmdBack.TabIndex = 50;
+            this.cmdBack.TabIndex = 7;
             this.cmdBack.Text = "Go Back";
             this.cmdBack.UseVisualStyleBackColor = false;
             this.cmdBack.Click += new System.EventHandler(this.cmdBack_Click);
             // 
             // cmdImport
             // 
-            this.cmdImport.Location = new System.Drawing.Point(76, 317);
+            this.cmdImport.BackColor = System.Drawing.Color.Orange;
+            this.cmdImport.Location = new System.Drawing.Point(75, 311);
             this.cmdImport.Name = "cmdImport";
-            this.cmdImport.Size = new System.Drawing.Size(141, 23);
-            this.cmdImport.TabIndex = 51;
+            this.cmdImport.Size = new System.Drawing.Size(141, 57);
+            this.cmdImport.TabIndex = 8;
             this.cmdImport.Text = "Import From File";
-            this.cmdImport.UseVisualStyleBackColor = true;
+            this.cmdImport.UseVisualStyleBackColor = false;
             this.cmdImport.Click += new System.EventHandler(this.button1_Click);
             // 
             // dg1
@@ -155,19 +158,39 @@
             this.dg1.AllowUserToDeleteRows = false;
             this.dg1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dg1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg1.EnableHeadersVisualStyles = false;
             this.dg1.Location = new System.Drawing.Point(223, 13);
             this.dg1.Name = "dg1";
             this.dg1.ReadOnly = true;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Format = "N0";
+            dataGridViewCellStyle1.NullValue = null;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dg1.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dg1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dg1.Size = new System.Drawing.Size(510, 264);
             this.dg1.TabIndex = 52;
             this.dg1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg1_CellContentClick);
             // 
+            // lblInsertMessage
+            // 
+            this.lblInsertMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInsertMessage.Location = new System.Drawing.Point(343, 285);
+            this.lblInsertMessage.Name = "lblInsertMessage";
+            this.lblInsertMessage.Size = new System.Drawing.Size(390, 23);
+            this.lblInsertMessage.TabIndex = 69;
+            // 
             // Hours
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(745, 352);
+            this.ClientSize = new System.Drawing.Size(745, 380);
+            this.Controls.Add(this.lblInsertMessage);
             this.Controls.Add(this.dg1);
             this.Controls.Add(this.cmdImport);
             this.Controls.Add(this.cmdBack);
@@ -206,6 +229,7 @@
         private System.Windows.Forms.Button cmdImport;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.DataGridView dg1;
+        private System.Windows.Forms.Label lblInsertMessage;
     }
 }
 
