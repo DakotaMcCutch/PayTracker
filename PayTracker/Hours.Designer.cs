@@ -92,6 +92,7 @@
             // 
             // dtpFinish
             // 
+            this.dtpFinish.CustomFormat = "HH:mm";
             this.dtpFinish.Location = new System.Drawing.Point(16, 118);
             this.dtpFinish.Name = "dtpFinish";
             this.dtpFinish.Size = new System.Drawing.Size(145, 20);
@@ -162,6 +163,7 @@
             this.dg1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dg1.EnableHeadersVisualStyles = false;
             this.dg1.Location = new System.Drawing.Point(223, 13);
+            this.dg1.MultiSelect = false;
             this.dg1.Name = "dg1";
             this.dg1.ReadOnly = true;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;

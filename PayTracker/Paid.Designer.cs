@@ -58,7 +58,7 @@
             this.dtpDate.Location = new System.Drawing.Point(13, 30);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(148, 20);
-            this.dtpDate.TabIndex = 5;
+            this.dtpDate.TabIndex = 1;
             // 
             // lblDate
             // 
@@ -75,7 +75,7 @@
             this.cmdBack.Location = new System.Drawing.Point(11, 311);
             this.cmdBack.Name = "cmdBack";
             this.cmdBack.Size = new System.Drawing.Size(58, 57);
-            this.cmdBack.TabIndex = 54;
+            this.cmdBack.TabIndex = 6;
             this.cmdBack.Text = "Go Back";
             this.cmdBack.UseVisualStyleBackColor = false;
             this.cmdBack.Click += new System.EventHandler(this.cmdBack_Click);
@@ -86,7 +86,7 @@
             this.cmdUpdate.Location = new System.Drawing.Point(395, 311);
             this.cmdUpdate.Name = "cmdUpdate";
             this.cmdUpdate.Size = new System.Drawing.Size(167, 57);
-            this.cmdUpdate.TabIndex = 52;
+            this.cmdUpdate.TabIndex = 4;
             this.cmdUpdate.Text = "Update";
             this.cmdUpdate.UseVisualStyleBackColor = false;
             this.cmdUpdate.Click += new System.EventHandler(this.cmdUpdate_Click);
@@ -97,7 +97,7 @@
             this.cmdDelete.Location = new System.Drawing.Point(568, 311);
             this.cmdDelete.Name = "cmdDelete";
             this.cmdDelete.Size = new System.Drawing.Size(167, 57);
-            this.cmdDelete.TabIndex = 53;
+            this.cmdDelete.TabIndex = 5;
             this.cmdDelete.Text = "Delete";
             this.cmdDelete.UseVisualStyleBackColor = false;
             this.cmdDelete.Click += new System.EventHandler(this.cmdDelete_Click);
@@ -108,7 +108,7 @@
             this.cmdInsert.Location = new System.Drawing.Point(222, 311);
             this.cmdInsert.Name = "cmdInsert";
             this.cmdInsert.Size = new System.Drawing.Size(167, 57);
-            this.cmdInsert.TabIndex = 51;
+            this.cmdInsert.TabIndex = 3;
             this.cmdInsert.Text = "Insert";
             this.cmdInsert.UseVisualStyleBackColor = false;
             this.cmdInsert.Click += new System.EventHandler(this.cmdInsert_Click);
@@ -118,7 +118,8 @@
             this.txtAmount.Location = new System.Drawing.Point(13, 74);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(148, 20);
-            this.txtAmount.TabIndex = 55;
+            this.txtAmount.TabIndex = 2;
+            this.txtAmount.Text = "0.00";
             // 
             // dg1
             // 
@@ -132,7 +133,7 @@
             this.dg1.Name = "dg1";
             this.dg1.ReadOnly = true;
             this.dg1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dg1.Size = new System.Drawing.Size(513, 264);
+            this.dg1.Size = new System.Drawing.Size(771, 264);
             this.dg1.TabIndex = 56;
             // 
             // lblInsertMessage
@@ -147,7 +148,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(745, 380);
+            this.ClientSize = new System.Drawing.Size(1006, 380);
             this.Controls.Add(this.lblInsertMessage);
             this.Controls.Add(this.dg1);
             this.Controls.Add(this.txtAmount);
