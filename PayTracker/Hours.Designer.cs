@@ -59,10 +59,12 @@
             // 
             // dtpDate
             // 
+            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDate.Location = new System.Drawing.Point(13, 30);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(148, 20);
             this.dtpDate.TabIndex = 1;
+            this.dtpDate.Value = new System.DateTime(2015, 1, 18, 0, 0, 0, 0);
             // 
             // lblStart
             // 
@@ -76,6 +78,7 @@
             // dtpStart
             // 
             this.dtpStart.CustomFormat = "HH:mm";
+            this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtpStart.Location = new System.Drawing.Point(13, 74);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.Size = new System.Drawing.Size(148, 20);
@@ -93,6 +96,7 @@
             // dtpFinish
             // 
             this.dtpFinish.CustomFormat = "HH:mm";
+            this.dtpFinish.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtpFinish.Location = new System.Drawing.Point(16, 118);
             this.dtpFinish.Name = "dtpFinish";
             this.dtpFinish.Size = new System.Drawing.Size(145, 20);

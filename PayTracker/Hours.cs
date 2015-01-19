@@ -41,8 +41,10 @@ namespace PayTracker
             dtpDate.CustomFormat = "MM/dd/yyyy";
             dtpDate.Format = DateTimePickerFormat.Custom;
             dtpStart.CustomFormat = "HH:mm";
+            dtpStart.ShowUpDown = true;
             dtpStart.Format = DateTimePickerFormat.Custom;
             dtpFinish.CustomFormat = "HH:mm";
+            dtpFinish.ShowUpDown = true;
             dtpFinish.Format = DateTimePickerFormat.Custom;
 
         }
@@ -129,7 +131,7 @@ namespace PayTracker
                         }
                     }
                 }
-                dtpDate.Value = DateTime.ParseExact((dg1.CurrentRow.Cells[0].Value.ToString()), "dd/MM/yyyy", new CultureInfo("en-US"), DateTimeStyles.None);
+                dtpDate.Value = Convert.ToDateTime((dg1.CurrentRow.Cells[0].Value.ToString()));
                 dtpStart.Value = Convert.ToDateTime((dg1.CurrentRow.Cells[1].Value.ToString()));
                 dtpFinish.Value = Convert.ToDateTime((dg1.CurrentRow.Cells[2].Value.ToString()));
                 setControlState("u/d");
@@ -182,7 +184,7 @@ namespace PayTracker
         {
             int rowCount = Convert.ToInt32(dg1.Rows.Count);
             DateTime oldUnder = new DateTime(2013, 04, 28);
-            DateTime newOver = new DateTime(2013, 04, 28);
+            DateTime newOver = new DateTime(2014, 06, 01);
             if ((Convert.ToDateTime(dtpDate.Value).CompareTo(oldUnder)) <= 0)
             {
                 rate = 9.65;
@@ -201,7 +203,7 @@ namespace PayTracker
             }
             if (rowCount <= 0)
             {
-                date = dtpDate.Value.ToString("dd/MM/yyyy");
+                date = dtpDate.Value.ToString("yyyy/MM/dd");
                 start = dtpStart.Value.TimeOfDay;
                 finish = dtpFinish.Value.TimeOfDay;
                 hours = finish - start;
@@ -216,7 +218,7 @@ namespace PayTracker
             }
             else
             {
-                date = dtpDate.Value.ToString("dd/MM/yyyy");
+                date = dtpDate.Value.ToString("yyyy/MM/dd");
                 start = dtpStart.Value.TimeOfDay;
                 finish = dtpFinish.Value.TimeOfDay;
                 hours = finish - start;
@@ -348,7 +350,8 @@ namespace PayTracker
 
         public void formatGrid()
         {
-            dg1.Sort(dg1.Columns["Date"], ListSortDirection.Ascending);
+           dg1.Sort(dg1.Columns["Date"], ListSortDirection.Ascending);
+           dg1.Columns[0].DefaultCellStyle.Format = "dd/MM/yyyy";
         }
 
         private void cmdDelete_Click(object sender, EventArgs e)
@@ -358,7 +361,7 @@ namespace PayTracker
                 if (MessageBox.Show("Are you sure you want to delete this entry?", "Confirm Entry Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
                 {
                     ds.Tables[0].Rows[rowIndex].Delete();
-                    da.Update(ds, "Patients");
+                    da.Update(ds, "PayData");
                 }
             }
             catch (IndexOutOfRangeException)
@@ -423,8 +426,8 @@ namespace PayTracker
                 {
                     dg1.Columns[i].Visible = false;
                 }
+                dg1.Columns[0].ValueType = typeof(DateTime);
                 dg1.ClearSelection();
-                dg1.Columns[1].DefaultCellStyle.Format = "MM/dd/yyyy";
                 setControlState("i");
             }
             catch (SqlException ex)
@@ -538,7 +541,7 @@ namespace PayTracker
                     }
                     else
                     {
-                        dr["Date"] = temp[0];
+                        dr["Date"] = DateTime.ParseExact(temp[0], "yyyy/MM/dd", CultureInfo.InvariantCulture); ;
                         dr["Start"] = temp[1];
                         dr["Finish"] = temp[2];
                         dr["Hours"] = Convert.ToDouble(temp[3]);
@@ -550,6 +553,7 @@ namespace PayTracker
                         dr["T-Pay"] = Convert.ToDouble(temp[9]);
                         dr["T-Paid"] = Convert.ToDouble(temp[10]);
                         dr["Balance"] = Convert.ToDouble(temp[11]);
+                        dg1.Columns[0].ValueType = typeof(DateTime);
                         ds.Tables["PayData"].Rows.Add(dr);
                         da.Update(ds, "PayData");
                     }
