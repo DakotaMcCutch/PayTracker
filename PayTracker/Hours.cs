@@ -24,7 +24,6 @@ namespace PayTracker
         double pay = 0.0;
         double paid = 0.0;
         double totalHours = 0.0;
-        double totalRate = 0.0;
         double totalPay = 0.0;
         double totalPaid = 0.0;
         double balance = 0.0;
@@ -88,6 +87,7 @@ namespace PayTracker
         {
             if (e.KeyCode == Keys.Escape)
             {
+                dg1.ClearSelection();
                 setControlState("i");
             }
             else if (e.KeyCode == Keys.Tab)
@@ -210,11 +210,9 @@ namespace PayTracker
                 pay = hours.TotalHours * rate;
                 paid = 0.00;
                 totalHours = hours.TotalHours;
-                totalRate = rate;
                 totalPay = pay;
                 totalPaid = paid;
                 balance = pay ;
-
             }
             else
             {
@@ -224,22 +222,68 @@ namespace PayTracker
                 hours = finish - start;
                 pay = hours.TotalHours * rate;
                 paid = 0.00;
-                totalHours = hours.TotalHours + Convert.ToDouble(dg1.Rows[dg1.Rows.Count - 1].Cells[7].Value.ToString());
-                totalRate = rate + Convert.ToDouble(dg1.Rows[Convert.ToInt32(dg1.Rows.Count - 1)].Cells[8].Value.ToString());
-                totalPay = pay + Convert.ToDouble(dg1.Rows[Convert.ToInt32(dg1.Rows.Count - 1)].Cells[9].Value.ToString());
-                totalPaid = paid + Convert.ToDouble(dg1.Rows[Convert.ToInt32(dg1.Rows.Count - 1)].Cells[10].Value.ToString());
-                balance = pay + (Convert.ToDouble(dg1.Rows[Convert.ToInt32(dg1.Rows.Count - 1)].Cells[11].Value.ToString()) - paid);
+                        totalHours = hours.TotalHours + Convert.ToDouble(dg1.Rows[dg1.Rows.Count - 1].Cells[7].Value.ToString());
+                        totalPay = pay + Convert.ToDouble(dg1.Rows[Convert.ToInt32(dg1.Rows.Count - 1)].Cells[8].Value.ToString());
+                        totalPaid = paid + Convert.ToDouble(dg1.Rows[Convert.ToInt32(dg1.Rows.Count - 1)].Cells[9].Value.ToString());
+                        balance = pay + (Convert.ToDouble(dg1.Rows[Convert.ToInt32(dg1.Rows.Count - 1)].Cells[10].Value.ToString()) - paid);
+                }
+        }
+
+        private void reCalc()
+        {
+            dg1.Sort(dg1.Columns["Date"], ListSortDirection.Ascending);
+            int safety = dg1.Rows.Count;
+            for (int i = 0; i < dg1.Rows.Count; i++)
+            {
+                if (i ==0)
+                {
+
+                }
+                else if (i == 2)
+                {
+                    totalHours = Convert.ToDouble(dg1.Rows[i].Cells[7].Value.ToString()) + Convert.ToDouble(dg1.Rows[i - 1].Cells[7].Value.ToString());
+                    totalPay = Convert.ToDouble(dg1.Rows[i].Cells[8].Value.ToString()) + Convert.ToDouble(dg1.Rows[i - 1].Cells[8].Value.ToString());
+                    totalPaid = Convert.ToDouble(dg1.Rows[i].Cells[9].Value.ToString()) + Convert.ToDouble(dg1.Rows[i - 1].Cells[9].Value.ToString());
+                    balance = Convert.ToDouble(dg1.Rows[i].Cells[10].Value.ToString()) + (Convert.ToDouble(dg1.Rows[i - 1].Cells[10].Value.ToString()) - Convert.ToDouble(dg1.Rows[i].Cells[5].Value.ToString()));
+                    if (validInfo())
+                    {
+                        if (validPrimary("u"))
+                        {
+                            DataRow dr = ds.Tables[0].Rows[i];
+                            dr["T-Hours"] = totalHours;
+                            dr["T-Pay"] = totalPay;
+                            dr["T-Paid"] = totalPaid;
+                            dr["Balance"] = balance;
+                            da.Update(ds, "PayData");
+                            formatGrid();
+                        }
+                    }
+                }
+                else
+                {
+                    if ((i-1) > 0)
+                    {
+                        totalHours = Convert.ToDouble(dg1.Rows[i].Cells[7].Value.ToString()) + Convert.ToDouble(dg1.Rows[i - 1].Cells[7].Value.ToString());
+                        totalPay = Convert.ToDouble(dg1.Rows[i].Cells[8].Value.ToString()) + Convert.ToDouble(dg1.Rows[Convert.ToInt32(i - 1)].Cells[8].Value.ToString());
+                        totalPaid = Convert.ToDouble(dg1.Rows[i].Cells[9].Value.ToString()) + Convert.ToDouble(dg1.Rows[Convert.ToInt32(i - 1)].Cells[9].Value.ToString());
+                        balance = Convert.ToDouble(dg1.Rows[i].Cells[10].Value.ToString()) + (Convert.ToDouble(dg1.Rows[Convert.ToInt32(i - 1)].Cells[10].Value.ToString()) - Convert.ToDouble(dg1.Rows[i].Cells[6].Value.ToString()));
+                        if (validInfo())
+                        {
+                            if (validPrimary("u"))
+                            {
+                                DataRow dr = ds.Tables[0].Rows[i];
+                                dr["T-Hours"] = totalHours;
+                                dr["T-Pay"] = totalPay;
+                                dr["T-Paid"] = totalPaid;
+                                dr["Balance"] = balance;
+                                da.Update(ds, "PayData");
+                                formatGrid();
+                            }
+                        }
+                    }
+                    
+                }
             }
-            //hours = Convert.ToInt32(dtpFinish.Text.ToString()) - Convert.ToInt32(dtpStart.Text.ToString());
-
-            //pay = hours * rate;
-
-
-            //totalHours = hours + Convert.ToDouble(dg1.Rows[Convert.ToInt32(dg1.RowCount.ToString())].Cells[7].Value.ToString());
-            //totalRate = rate + Convert.ToDouble(dg1.Rows[Convert.ToInt32(dg1.RowCount.ToString())].Cells[8].Value.ToString());
-            //totalPay = pay + Convert.ToDouble(dg1.Rows[Convert.ToInt32(dg1.RowCount.ToString())].Cells[9].Value.ToString());
-            //totalPaid = paid + Convert.ToDouble(dg1.Rows[Convert.ToInt32(dg1.RowCount.ToString())].Cells[10].Value.ToString());
-            //balance = pay + (Convert.ToDouble(dg1.Rows[Convert.ToInt32(dg1.RowCount.ToString())].Cells[11].Value.ToString()) - paid);
         }
 
         private void clear()
@@ -256,7 +300,7 @@ namespace PayTracker
 
         private void cmdInsert_Click(object sender, EventArgs e)
         {
-            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Rate", "T-Pay", "T-Paid", "Balance" };
+            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Pay", "T-Paid", "Balance" };
             DateTimePicker[] dtp = { dtpDate, dtpStart, dtpFinish };
 
             if (validInfo())
@@ -281,18 +325,7 @@ namespace PayTracker
                     else
                     {
                         calc();
-                        Debug.WriteLine(date);
-                        Debug.WriteLine(start);
-                        Debug.WriteLine(finish);
-                        Debug.WriteLine(hours);
-                        Debug.WriteLine(rate);
-                        Debug.WriteLine(pay);
-                        Debug.WriteLine(paid);
-                        Debug.WriteLine(totalHours);
-                        Debug.WriteLine(totalRate);
-                        Debug.WriteLine(totalPay);
-                        Debug.WriteLine(totalPaid);
-                        dr["Date"] =date;
+                        dr["Date"] = date;
                         dr["Start"] = start;
                         dr["Finish"] = finish;
                         dr["Hours"] = hours;
@@ -300,7 +333,6 @@ namespace PayTracker
                         dr["Pay"] = pay;
                         dr["Paid"] = paid;
                         dr["T-Hours"] = totalHours;
-                        dr["T-Rate"] = totalRate;
                         dr["T-Pay"] = totalPay;
                         dr["T-Paid"] = totalPaid;
                         dr["Balance"] = balance;
@@ -313,12 +345,11 @@ namespace PayTracker
                     }
                 }
             }
-
         }
 
         private void cmdUpdate_Click(object sender, EventArgs e)
         {
-            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Rate", "T-Pay", "T-Paid", "Balance" };
+            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Pay", "T-Paid", "Balance" };
             DateTimePicker[] dtp = { dtpDate, dtpStart, dtpFinish };
 
             if (validInfo())
@@ -335,7 +366,6 @@ namespace PayTracker
                     dr["Pay"] = pay;
                     dr["Paid"] = paid;
                     dr["T-Hours"] = totalHours;
-                    dr["T-Rate"] = totalRate;
                     dr["T-Pay"] = totalPay;
                     dr["T-Paid"] = totalPaid;
                     dr["Balance"] = balance;
@@ -397,14 +427,14 @@ namespace PayTracker
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void cmdImport_Click(object sender, EventArgs e)
         {
             getFileData();
         }
 
         private void getData()
         {
-            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Rate", "T-Pay", "T-Paid", "Balance" };
+            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Pay", "T-Paid", "Balance" };
             string connStr = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;";
             try
             {
@@ -422,9 +452,13 @@ namespace PayTracker
                 bindingSource1.DataSource = ds;
                 bindingSource1.DataMember = "PayData";
                 dg1.DataSource = bindingSource1;
-                for (int i = 3; i < columns.Length; i++)
+                for (int i = 0; i < columns.Length; i++)
                 {
-                    dg1.Columns[i].Visible = false;
+                    dg1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                    if (i > 2)
+                    {
+                        dg1.Columns[i].Visible = false;
+                    }
                 }
                 dg1.Columns[0].ValueType = typeof(DateTime);
                 dg1.ClearSelection();
@@ -521,7 +555,7 @@ namespace PayTracker
             while (record != null)
             {
                 string[] temp = record.Split(',');
-                Debug.WriteLine(temp[0] + " " + temp[1] + " " + temp[2] + " " + temp[3] + " " + temp[4] + " " + temp[5] + " " + temp[6] + " " + temp[7] + " " + temp[8] + " " + temp[9] + " " + temp[10] + " " + temp[11]);
+                Debug.WriteLine(temp[0] + " " + temp[1] + " " + temp[2] + " " + temp[3] + " " + temp[4] + " " + temp[5] + " " + temp[6] + " " + temp[7] + " " + temp[8] + " " + temp[9] + " " + temp[10]);
                 try
                 {
                     conn = new SqlConnection(connStr);
@@ -549,13 +583,13 @@ namespace PayTracker
                         dr["Pay"] = Convert.ToDouble(temp[5]);
                         dr["Paid"] = Convert.ToDouble(temp[6]);
                         dr["T-Hours"] = Convert.ToDouble(temp[7]);
-                        dr["T-Rate"] = Convert.ToDouble(temp[8]);
-                        dr["T-Pay"] = Convert.ToDouble(temp[9]);
-                        dr["T-Paid"] = Convert.ToDouble(temp[10]);
-                        dr["Balance"] = Convert.ToDouble(temp[11]);
+                        dr["T-Pay"] = Convert.ToDouble(temp[8]);
+                        dr["T-Paid"] = Convert.ToDouble(temp[9]);
+                        dr["Balance"] = Convert.ToDouble(temp[10]);
                         dg1.Columns[0].ValueType = typeof(DateTime);
                         ds.Tables["PayData"].Rows.Add(dr);
                         da.Update(ds, "PayData");
+                        dg1.ClearSelection();
                     }
                 }
                 catch (SqlException ex)
@@ -570,6 +604,11 @@ namespace PayTracker
                 record = sr.ReadLine();
             }
             sr.Close();
+        }
+
+        private void cmdReCalc_Click(object sender, EventArgs e)
+        {
+            reCalc();
         }
     }
 }

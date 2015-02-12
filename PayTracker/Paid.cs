@@ -23,7 +23,6 @@ namespace PayTracker
         double pay = 0.0;
         double paid = 0.0;
         double totalHours;
-        double totalRate = 0.0;
         double totalPay = 0.0;
         double totalPaid = 0.0;
         double balance = 0.0;
@@ -94,7 +93,7 @@ namespace PayTracker
         {
             string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Rate", "T-Pay", "T-Paid", "Balance" };
             DateTimePicker[] dtp = { dtpDate, };
-            ArrayList a = new ArrayList { date, start, finish, hours, rate, pay, paid, totalHours, totalRate, totalPay, totalPaid };
+            ArrayList a = new ArrayList { date, start, finish, hours, rate, pay, paid, totalHours, totalPay, totalPaid };
             if (validInfo())
             {
                 if (validPrimary("i"))
@@ -117,17 +116,6 @@ namespace PayTracker
                     else
                     {
                         calc();
-                        Debug.WriteLine(date);
-                        Debug.WriteLine(start);
-                        Debug.WriteLine(finish);
-                        Debug.WriteLine(hours);
-                        Debug.WriteLine(rate);
-                        Debug.WriteLine(pay);
-                        Debug.WriteLine(paid);
-                        Debug.WriteLine(totalHours);
-                        Debug.WriteLine(totalRate);
-                        Debug.WriteLine(totalPay);
-                        Debug.WriteLine(totalPaid);
                         dr["Date"] = date;
                         dr["Start"] = start;
                         dr["Finish"] = finish;
@@ -136,7 +124,6 @@ namespace PayTracker
                         dr["Pay"] = pay;
                         dr["Paid"] = paid;
                         dr["T-Hours"] = totalHours;
-                        dr["T-Rate"] = totalRate;
                         dr["T-Pay"] = totalPay;
                         dr["T-Paid"] = totalPaid;
                         dr["Balance"] = balance;
@@ -155,7 +142,7 @@ namespace PayTracker
 
         private void cmdUpdate_Click(object sender, EventArgs e)
         {
-            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Rate", "T-Pay", "T-Paid", "Balance" };
+            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Pay", "T-Paid", "Balance" };
             DateTimePicker[] dtp = { dtpDate };
 
             if (validInfo())
@@ -172,7 +159,6 @@ namespace PayTracker
                     dr["Pay"] = pay;
                     dr["Paid"] = paid;
                     dr["T-Hours"] = totalHours;
-                    dr["T-Rate"] = totalRate;
                     dr["T-Pay"] = totalPay;
                     dr["T-Paid"] = totalPaid;
                     dr["Balance"] = balance;
@@ -296,6 +282,18 @@ namespace PayTracker
                 bindingSource1.DataSource = ds;
                 bindingSource1.DataMember = "PayData";
                 dg1.DataSource = bindingSource1;
+                for (int i = 0; i < columns.Length; i++)
+                {
+                    dg1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                    if (i == 1 || i == 2 || i == 3 || i == 4)
+                    {
+                        dg1.Columns[i].Visible = false;
+                    }
+                    if (i > 4)
+                    {
+                        dg1.Columns[i].DefaultCellStyle.Format = "N2";
+                    }
+                }
                     dg1.ClearSelection();
 
             }
@@ -373,7 +371,6 @@ namespace PayTracker
                 pay = 0.00;
                 paid = Convert.ToDouble(txtAmount.Text.ToString());
                 totalHours = hours.TotalHours;
-                totalRate = rate;
                 totalPay = pay;
                 totalPaid = paid;
                 balance = pay;
@@ -388,10 +385,9 @@ namespace PayTracker
                 pay = 0.00;
                 paid = Convert.ToDouble(txtAmount.Text.ToString());
                 totalHours = hours.TotalHours + Convert.ToDouble(dg1.Rows[dg1.Rows.Count - 1].Cells[7].Value.ToString());
-                totalRate = rate + Convert.ToDouble(dg1.Rows[dg1.Rows.Count - 1].Cells[8].Value.ToString());
-                totalPay = pay + Convert.ToDouble(dg1.Rows[dg1.Rows.Count - 1].Cells[9].Value.ToString());
-                totalPaid = paid + Convert.ToDouble(dg1.Rows[dg1.Rows.Count - 1].Cells[10].Value.ToString());
-                balance = pay + (Convert.ToDouble(dg1.Rows[dg1.Rows.Count - 1].Cells[11].Value.ToString()) - paid);
+                totalPay = pay + Convert.ToDouble(dg1.Rows[dg1.Rows.Count - 1].Cells[8].Value.ToString());
+                totalPaid = paid + Convert.ToDouble(dg1.Rows[dg1.Rows.Count - 1].Cells[9].Value.ToString());
+                balance = pay + (Convert.ToDouble(dg1.Rows[dg1.Rows.Count - 1].Cells[10].Value.ToString()) - paid);
             }
             
         }

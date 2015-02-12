@@ -63,6 +63,7 @@ namespace PayTracker
             this.ForeColor = Properties.Settings.Default.foreColor;
             cmdHours.ForeColor = SystemColors.ControlText;
             cmdPaid.ForeColor = SystemColors.ControlText;
+            cmdAll.ForeColor = SystemColors.ControlText;
             Properties.Settings.Default.Save();
         }
         private void Start_FormClosing(object sender, FormClosingEventArgs e)
@@ -97,6 +98,13 @@ namespace PayTracker
             this.Hide(); ;
             Paid p = new Paid();
             p.Show();
+        }
+
+        private void cmdAll_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Data d = new Data();
+            d.Show();
         }
     }
 }

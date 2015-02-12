@@ -33,12 +33,13 @@
             this.lblTop = new System.Windows.Forms.Label();
             this.cbTheme = new System.Windows.Forms.ComboBox();
             this.lblTheme = new System.Windows.Forms.Label();
+            this.cmdAll = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmdPaid
             // 
             this.cmdPaid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.cmdPaid.Location = new System.Drawing.Point(12, 159);
+            this.cmdPaid.Location = new System.Drawing.Point(12, 147);
             this.cmdPaid.Name = "cmdPaid";
             this.cmdPaid.Size = new System.Drawing.Size(317, 76);
             this.cmdPaid.TabIndex = 56;
@@ -74,7 +75,7 @@
             this.cbTheme.Items.AddRange(new object[] {
             "Normal",
             "Dark"});
-            this.cbTheme.Location = new System.Drawing.Point(116, 243);
+            this.cbTheme.Location = new System.Drawing.Point(119, 317);
             this.cbTheme.Name = "cbTheme";
             this.cbTheme.Size = new System.Drawing.Size(121, 21);
             this.cbTheme.TabIndex = 57;
@@ -82,18 +83,30 @@
             // lblTheme
             // 
             this.lblTheme.AutoSize = true;
-            this.lblTheme.Location = new System.Drawing.Point(58, 246);
+            this.lblTheme.Location = new System.Drawing.Point(61, 320);
             this.lblTheme.Name = "lblTheme";
             this.lblTheme.Size = new System.Drawing.Size(46, 13);
             this.lblTheme.TabIndex = 58;
             this.lblTheme.Text = "Theme :";
+            // 
+            // cmdAll
+            // 
+            this.cmdAll.BackColor = System.Drawing.Color.Yellow;
+            this.cmdAll.Location = new System.Drawing.Point(12, 229);
+            this.cmdAll.Name = "cmdAll";
+            this.cmdAll.Size = new System.Drawing.Size(317, 76);
+            this.cmdAll.TabIndex = 59;
+            this.cmdAll.Text = "All Data";
+            this.cmdAll.UseVisualStyleBackColor = false;
+            this.cmdAll.Click += new System.EventHandler(this.cmdAll_Click);
             // 
             // Start
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(357, 276);
+            this.ClientSize = new System.Drawing.Size(357, 352);
+            this.Controls.Add(this.cmdAll);
             this.Controls.Add(this.lblTheme);
             this.Controls.Add(this.cbTheme);
             this.Controls.Add(this.cmdPaid);
@@ -115,5 +128,6 @@
         private System.Windows.Forms.Label lblTop;
         private System.Windows.Forms.ComboBox cbTheme;
         private System.Windows.Forms.Label lblTheme;
+        private System.Windows.Forms.Button cmdAll;
     }
 }
