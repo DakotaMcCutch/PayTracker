@@ -256,10 +256,9 @@ namespace PayTracker
                         dr["Pay"] = Convert.ToDouble(temp[5]);
                         dr["Paid"] = Convert.ToDouble(temp[6]);
                         dr["T-Hours"] = Convert.ToDouble(temp[7]);
-                        dr["T-Rate"] = Convert.ToDouble(Convert.ToDecimal(temp[8]).ToString("N"));
-                        dr["T-Pay"] = Convert.ToDouble(temp[9]);
-                        dr["T-Paid"] = Convert.ToDouble(temp[10]);
-                        dr["Balance"] = Convert.ToDouble(temp[11]);
+                        dr["T-Pay"] = Convert.ToDouble(temp[8]);
+                        dr["T-Paid"] = Convert.ToDouble(temp[9]);
+                        dr["Balance"] = Convert.ToDouble(temp[10]);
                         dg1.Columns[0].ValueType = typeof(DateTime);
                         ds.Tables["PayData"].Rows.Add(dr);
                         da.Update(ds, "PayData");
