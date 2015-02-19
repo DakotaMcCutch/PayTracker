@@ -1,31 +1,31 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Diagnostics;
-using System.Collections;
 
 namespace PayTracker
 {
     public partial class Paid : Form
     {
-        private SqlConnection conn = null;
-        private SqlDataAdapter da = null;
+        private MySqlConnection conn = null;
+        private MySqlDataAdapter da = null;
         private DataSet ds = null;
-        int rowIndex = -1;
-        string date = "";
-        TimeSpan start;
-        TimeSpan finish;
-        double rate = 0.0;
-        TimeSpan hours;
-        double pay = 0.0;
-        double paid = 0.0;
-        double totalHours;
-        double totalPay = 0.0;
-        double totalPaid = 0.0;
-        double balance = 0.0;
+        private int rowIndex = -1;
+        private string date = "";
+        private TimeSpan start;
+        private TimeSpan finish;
+        private double rate = 0.0;
+        private TimeSpan hours;
+        private double pay = 0.0;
+        private double paid = 0.0;
+        private double totalHours;
+        private double totalPay = 0.0;
+        private double totalPaid = 0.0;
+        private double balance = 0.0;
 
         public Paid()
         {
@@ -37,7 +37,7 @@ namespace PayTracker
             dtpDate.MinDate = DateTime.Today.AddYears(-99);
             dtpDate.MaxDate = DateTime.Today;
             dtpDate.Text = DateTime.Today.ToString();
-            dtpDate.CustomFormat = "MM/dd/yyyy";
+            dtpDate.CustomFormat = "dd/MM/yyyy";
             dtpDate.Format = DateTimePickerFormat.Custom;
         }
 
@@ -48,11 +48,11 @@ namespace PayTracker
             dg1.RowPostPaint += dg1_RowPostPaint;
             FormClosing += Paid_FormClosing;
             dg1.Click += dg1_Click;
-            getData();
             setTheme();
+            getData();
         }
 
-        void dg1_Click(object sender, EventArgs e)
+        private void dg1_Click(object sender, EventArgs e)
         {
             populateGrid();
         }
@@ -77,6 +77,7 @@ namespace PayTracker
             dg1.DefaultCellStyle.SelectionBackColor = Properties.Settings.Default.selectionCellBack;
             dg1.DefaultCellStyle.SelectionForeColor = Properties.Settings.Default.selectionCellFore;
         }
+
         private void dtpDate_ValueChanged(object sender, EventArgs e)
         {
             SendKeys.Send("{Right}");
@@ -89,6 +90,39 @@ namespace PayTracker
             this.Hide();
         }
 
+        private void reCalc()
+        {
+            //dg1.Sort(dg1.Columns["Date"], ListSortDirection.Ascending);
+            int safety = dg1.Rows.Count;
+            dg1.Rows[safety - 1].Selected = true;
+            for (int i = 0; i < dg1.Rows.Count; i++)
+            {
+                if ((i - 1) >= 0)
+                {
+                    totalHours = TimeSpan.Parse(dg1.Rows[i].Cells[3].Value.ToString()).TotalHours + Convert.ToDouble(dg1.Rows[i - 1].Cells[7].Value.ToString());
+                    totalPay = Convert.ToDouble(dg1.Rows[i].Cells[5].Value.ToString()) + Convert.ToDouble(dg1.Rows[i - 1].Cells[8].Value.ToString());
+                    totalPaid = Convert.ToDouble(dg1.Rows[i].Cells[6].Value.ToString()) + Convert.ToDouble(dg1.Rows[i - 1].Cells[9].Value.ToString());
+                    balance = Convert.ToDouble(dg1.Rows[i].Cells[5].Value.ToString()) + Convert.ToDouble(dg1.Rows[i - 1].Cells[10].Value.ToString()) - Convert.ToDouble(dg1.Rows[i].Cells[6].Value.ToString());
+                    if (validInfo())
+                    {
+                        if (validPrimary("u"))
+                        {
+                            DataRow dr = ds.Tables[0].Rows[i];
+                            dr["T-Hours"] = totalHours;
+                            dr["T-Pay"] = totalPay;
+                            dr["T-Paid"] = totalPaid;
+                            dr["Balance"] = balance;
+                            da.Update(ds, "PayData");
+                            formatGrid();
+                            dg1.ClearSelection();
+                        }
+                    }
+                    dg1.ClearSelection();
+                }
+                dg1.ClearSelection();
+            }
+        }
+
         private void cmdInsert_Click(object sender, EventArgs e)
         {
             string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Rate", "T-Pay", "T-Paid", "Balance" };
@@ -98,15 +132,15 @@ namespace PayTracker
             {
                 if (validPrimary("i"))
                 {
-                    string connStr = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True";
-                    SqlConnection conn = new SqlConnection(connStr);
+                    string connStr = "id=Owner;persistsecurityinfo=True;database=Data;allowuservariables=True;pooling=False";
+                    MySqlConnection conn = new MySqlConnection(connStr);
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand();
+                    MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conn;
-                    string sql = "Select [Date], [Start], [Finish] FROM [PayData] WHERE [Date] = '" + dtpDate.Text.ToString() + "'AND [Paid]= '" + txtAmount.Text.ToString() + "'";
+                    string sql = "Select Date, Start, Finish FROM PayData WHERE Date = '" + dtpDate.Text.ToString() + "'AND [Paid]= '" + txtAmount.Text.ToString() + "'";
                     cmd.CommandText = sql;
                     DataRow dr = ds.Tables["PayData"].NewRow();
-                    SqlDataReader dataReader = cmd.ExecuteReader();
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
 
                     if (dataReader.HasRows)
                     {
@@ -119,7 +153,7 @@ namespace PayTracker
                         dr["Date"] = date;
                         dr["Start"] = start;
                         dr["Finish"] = finish;
-                        dr["Hours"] = hours;
+                        dr["Hours"] = hours.TotalHours;
                         dr["Rate"] = rate;
                         dr["Pay"] = pay;
                         dr["Paid"] = paid;
@@ -127,17 +161,17 @@ namespace PayTracker
                         dr["T-Pay"] = totalPay;
                         dr["T-Paid"] = totalPaid;
                         dr["Balance"] = balance;
-                        
+
                         ds.Tables["PayData"].Rows.Add(dr);
                         da.Update(ds, "PayData");
                         clear();
                         setControlState("i");
                         formatGrid();
                         dg1.ClearSelection();
+                        reCalc();
                     }
                 }
             }
-
         }
 
         private void cmdUpdate_Click(object sender, EventArgs e)
@@ -154,7 +188,7 @@ namespace PayTracker
                     dr["Date"] = date;
                     dr["Start"] = start;
                     dr["Finish"] = finish;
-                    dr["Hours"] = hours;
+                    dr["Hours"] = hours.TotalHours;
                     dr["Rate"] = rate;
                     dr["Pay"] = pay;
                     dr["Paid"] = paid;
@@ -167,6 +201,7 @@ namespace PayTracker
                     setControlState("i");
                     formatGrid();
                     dg1.ClearSelection();
+                    reCalc();
                 }
             }
         }
@@ -189,17 +224,20 @@ namespace PayTracker
             setControlState("i");
             formatGrid();
             dg1.ClearSelection();
+            reCalc();
         }
 
         public void formatGrid()
         {
             dg1.Sort(dg1.Columns["Date"], ListSortDirection.Ascending);
+            dg1.Columns[0].DefaultCellStyle.Format = "dd/MM/yyyy";
         }
 
         private bool validInfo()
         {
             return true;
         }
+
         private bool validPrimary(string state)
         {
             if (state.Equals("i"))
@@ -262,17 +300,18 @@ namespace PayTracker
                 e.Cancel = true;
             }
         }
+
         private void getData()
         {
-            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Rate", "T-Pay", "T-Paid", "Balance" };
-            string connStr = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;";
+            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Pay", "T-Paid", "Balance" };
+            string connStr = "id=Owner;persistsecurityinfo=True;database=Data;allowuservariables=True;pooling=False";
             try
             {
-                conn = new SqlConnection(connStr);
-                //string sql = "SELECT [Date],[Start],[Finish] FROM [PayData]";
-                string sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file // WHERE [Start]='0:00' AND [Finish]='0:00'
-                da = new SqlDataAdapter(sql, conn);
-                SqlCommandBuilder cb = new SqlCommandBuilder(da);
+                conn = new MySqlConnection(connStr);
+                //string sql = "SELECT Date,Start,Finish FROM PayData";
+                string sql = "SELECT * FROM PayData"; //uncomment when uploading from file
+                da = new MySqlDataAdapter(sql, conn);
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(da);
                 ds = new DataSet();
                 conn.Open();
                 da.Fill(ds, "PayData");
@@ -294,8 +333,10 @@ namespace PayTracker
                         dg1.Columns[i].DefaultCellStyle.Format = "N2";
                     }
                 }
-                    dg1.ClearSelection();
-
+                dg1.Columns[0].ValueType = typeof(DateTime);
+                formatGrid();
+                dg1.ClearSelection();
+                setControlState("i");
             }
             catch (SqlException ex)
             {
@@ -306,7 +347,8 @@ namespace PayTracker
                 MessageBox.Show(ex.Message, "Error Reading Data");
             }
         }
-        void dg1_KeyDown(object sender, KeyEventArgs e)
+
+        private void dg1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
@@ -346,7 +388,7 @@ namespace PayTracker
             }
         }
 
-        void dg1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void dg1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             using (SolidBrush b = new SolidBrush(dg1.RowHeadersDefaultCellStyle.ForeColor))
             {
@@ -363,7 +405,21 @@ namespace PayTracker
             }
             if (rowCount <= 0)
             {
-                date = dtpDate.Value.ToString("dd/MM/yyyy");
+                date = dtpDate.Value.ToString("yyyy/MM/dd");
+                start = new TimeSpan(0, 0, 0);
+                finish = new TimeSpan(0, 0, 0);
+                hours = finish - start;
+                rate = 0.00;
+                pay = 0.00;
+                paid = Convert.ToDouble(txtAmount.Text.ToString());
+                totalHours = hours.TotalHours;
+                totalPay = pay;
+                totalPaid = paid;
+                balance = pay - paid;
+            }
+            else
+            {
+                date = dtpDate.Value.ToString("yyyy/MM/dd");
                 start = new TimeSpan(0, 0, 0);
                 finish = new TimeSpan(0, 0, 0);
                 hours = start - finish;
@@ -373,30 +429,15 @@ namespace PayTracker
                 totalHours = hours.TotalHours;
                 totalPay = pay;
                 totalPaid = paid;
-                balance = pay;
+                balance = pay - paid;
             }
-            else
-            {
-                date = dtpDate.Value.ToString("dd/MM/yyyy");
-                start = new TimeSpan(0, 0, 0);
-                finish = new TimeSpan(0, 0, 0);
-                hours = start - finish;
-                rate = 0.00;
-                pay = 0.00;
-                paid = Convert.ToDouble(txtAmount.Text.ToString());
-                totalHours = hours.TotalHours + Convert.ToDouble(dg1.Rows[dg1.Rows.Count - 1].Cells[7].Value.ToString());
-                totalPay = pay + Convert.ToDouble(dg1.Rows[dg1.Rows.Count - 1].Cells[8].Value.ToString());
-                totalPaid = paid + Convert.ToDouble(dg1.Rows[dg1.Rows.Count - 1].Cells[9].Value.ToString());
-                balance = pay + (Convert.ToDouble(dg1.Rows[dg1.Rows.Count - 1].Cells[10].Value.ToString()) - paid);
-            }
-            
         }
 
         private void clear()
         {
-                dtpDate.Text = DateTime.Today.ToString();
-                txtAmount.Text = "0.00";
-            }
+            dtpDate.Text = DateTime.Today.ToString();
+            txtAmount.Text = "0.00";
+        }
 
         private void setControlState(string state)
         {

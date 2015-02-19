@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblDate = new System.Windows.Forms.Label();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.lblStart = new System.Windows.Forms.Label();
@@ -44,7 +44,7 @@
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dg1 = new System.Windows.Forms.DataGridView();
             this.lblInsertMessage = new System.Windows.Forms.Label();
-            this.cmdReCalc = new System.Windows.Forms.Button();
+            this.cmdRecalc = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg1)).BeginInit();
             this.SuspendLayout();
@@ -171,16 +171,16 @@
             this.dg1.MultiSelect = false;
             this.dg1.Name = "dg1";
             this.dg1.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = null;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dg1.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dg1.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dg1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dg1.Size = new System.Drawing.Size(510, 264);
             this.dg1.TabIndex = 52;
@@ -193,23 +193,23 @@
             this.lblInsertMessage.Size = new System.Drawing.Size(390, 23);
             this.lblInsertMessage.TabIndex = 69;
             // 
-            // cmdReCalc
+            // cmdRecalc
             // 
-            this.cmdReCalc.BackColor = System.Drawing.Color.Orange;
-            this.cmdReCalc.Location = new System.Drawing.Point(39, 233);
-            this.cmdReCalc.Name = "cmdReCalc";
-            this.cmdReCalc.Size = new System.Drawing.Size(141, 57);
-            this.cmdReCalc.TabIndex = 70;
-            this.cmdReCalc.Text = "ReCalc";
-            this.cmdReCalc.UseVisualStyleBackColor = false;
-            this.cmdReCalc.Click += new System.EventHandler(this.cmdReCalc_Click);
+            this.cmdRecalc.BackColor = System.Drawing.Color.Orange;
+            this.cmdRecalc.Location = new System.Drawing.Point(37, 234);
+            this.cmdRecalc.Name = "cmdRecalc";
+            this.cmdRecalc.Size = new System.Drawing.Size(141, 57);
+            this.cmdRecalc.TabIndex = 70;
+            this.cmdRecalc.Text = "Import From File";
+            this.cmdRecalc.UseVisualStyleBackColor = false;
+            this.cmdRecalc.Click += new System.EventHandler(this.cmdRecalc_Click);
             // 
             // Hours
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(745, 380);
-            this.Controls.Add(this.cmdReCalc);
+            this.Controls.Add(this.cmdRecalc);
             this.Controls.Add(this.lblInsertMessage);
             this.Controls.Add(this.dg1);
             this.Controls.Add(this.cmdImport);
@@ -250,7 +250,7 @@
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.DataGridView dg1;
         private System.Windows.Forms.Label lblInsertMessage;
-        private System.Windows.Forms.Button cmdReCalc;
+        private System.Windows.Forms.Button cmdRecalc;
     }
 }
 

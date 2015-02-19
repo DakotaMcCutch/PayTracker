@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PayTracker
 {
     public partial class Data : Form
     {
-        private SqlConnection conn = null;
-        private SqlDataAdapter da = null;
+        private MySqlConnection conn = null;
+        private MySqlDataAdapter da = null;
         private DataSet ds = null;
-        int rowIndex = -1;
+        private int rowIndex = -1;
 
         public Data()
         {
@@ -28,7 +24,6 @@ namespace PayTracker
 
         private void startUp()
         {
-
         }
 
         private void Data_Load(object sender, EventArgs e)
@@ -37,13 +32,13 @@ namespace PayTracker
             dg1.RowPostPaint += dg1_RowPostPaint;
             FormClosing += Data_FormClosing;
             dg1.Click += dg1_Click;
-            getData();
             setTheme();
+            getData();
+            populateGrid();
         }
 
-        void dg1_Click(object sender, EventArgs e)
+        private void dg1_Click(object sender, EventArgs e)
         {
-            populateGrid();
         }
 
         public void setTheme()
@@ -66,6 +61,7 @@ namespace PayTracker
             dg1.DefaultCellStyle.SelectionBackColor = Properties.Settings.Default.selectionCellBack;
             dg1.DefaultCellStyle.SelectionForeColor = Properties.Settings.Default.selectionCellFore;
         }
+
         private void dtpDate_ValueChanged(object sender, EventArgs e)
         {
             SendKeys.Send("{Right}");
@@ -78,10 +74,11 @@ namespace PayTracker
             this.Hide();
         }
 
-
         public void formatGrid()
         {
             dg1.Sort(dg1.Columns["Date"], ListSortDirection.Ascending);
+            dg1.Columns[0].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dg1.ClearSelection();
         }
 
         private bool validInfo()
@@ -109,19 +106,20 @@ namespace PayTracker
         private void cmdImport_Click(object sender, EventArgs e)
         {
             getFileData();
+            dg1.ClearSelection();
         }
 
         private void getData()
         {
-            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Rate", "T-Pay", "T-Paid", "Balance" };
-            string connStr = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;";
+            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Pay", "T-Paid", "Balance" };
+            string connStr = "id=Owner;persistsecurityinfo=True;database=Data;allowuservariables=True;pooling=False";
             try
             {
-                conn = new SqlConnection(connStr);
-                //string sql = "SELECT [Date],[Start],[Finish] FROM [PayData]";
-                string sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file // WHERE [Start]='0:00' AND [Finish]='0:00'
-                da = new SqlDataAdapter(sql, conn);
-                SqlCommandBuilder cb = new SqlCommandBuilder(da);
+                conn = new MySqlConnection(connStr);
+                //string sql = "SELECT Date,Start,Finish FROM PayData";
+                string sql = "SELECT * FROM PayData"; //uncomment when uploading from file
+                da = new MySqlDataAdapter(sql, conn);
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(da);
                 ds = new DataSet();
                 conn.Open();
                 da.Fill(ds, "PayData");
@@ -139,8 +137,10 @@ namespace PayTracker
                         dg1.Columns[i].DefaultCellStyle.Format = "N2";
                     }
                 }
+                dg1.Columns[0].ValueType = typeof(DateTime);
+                formatGrid();
+                populateGrid();
                 dg1.ClearSelection();
-
             }
             catch (SqlException ex)
             {
@@ -151,10 +151,12 @@ namespace PayTracker
                 MessageBox.Show(ex.Message, "Error Reading Data");
             }
         }
-        void dg1_KeyDown(object sender, KeyEventArgs e)
+
+        private void dg1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
+                populateGrid();
             }
             else if (e.KeyCode == Keys.Tab)
             {
@@ -170,27 +172,17 @@ namespace PayTracker
         {
             if (dg1.Rows.Count != 0)
             {
-                dg1.CurrentRow.Selected = true;
-                rowIndex = dg1.CurrentRow.Index;
-
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                    if (ds.Tables[0].Rows[i].RowState != DataRowState.Deleted)
-                    {
-                        if (dg1.CurrentRow.Cells[0].Value.ToString().Equals(ds.Tables[0].Rows[i][0].ToString()))
-                        {
-                            rowIndex = i;
-                            break;
-                        }
-                    }
-                }
-                //txt.Value = Convert.ToDateTime((dg1.CurrentRow.Cells[0].Value.ToString()));
-                //txtAmount.Text = dg1.CurrentRow.Cells[6].Value.ToString();
-                //txtTHour.Text = dg1.CurrentRow.Cells[];
+                int safety = dg1.Rows.Count;
+                //dg1.RowsDg1.Rows.Count - 1].Selected = true;
+                dg1.CurrentCell = dg1.Rows[safety - 1].Cells[0];
+                txtTHour.Text = String.Format(dg1.CurrentRow.Cells[7].Value.ToString(), "N2");
+                txtTPay.Text = String.Format(dg1.CurrentRow.Cells[8].Value.ToString(), "N2");
+                txtTPaid.Text = String.Format(dg1.CurrentRow.Cells[9].Value.ToString(), "N2");
+                txtBalance.Text = String.Format(dg1.CurrentRow.Cells[10].Value.ToString(), "N2");
             }
         }
 
-        void dg1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void dg1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             using (SolidBrush b = new SolidBrush(dg1.RowHeadersDefaultCellStyle.ForeColor))
             {
@@ -198,23 +190,21 @@ namespace PayTracker
             }
         }
 
-
         private void clear()
         {
             txtTHour.Text = "";
             txtTPaid.Text = "";
             txtTPay.Text = "";
-            txtTRate.Text = "";
         }
 
         private void getFileData()
         {
             string connStr = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;Connect Timeout=30";
-            conn = new SqlConnection(connStr);
-            //string sql = "SELECT [Date],[Start],[Finish] FROM [PayData]";
-            string sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file
-            da = new SqlDataAdapter(sql, conn);
-            SqlCommandBuilder cb = new SqlCommandBuilder(da);
+            conn = new MySqlConnection(connStr);
+            //string sql = "SELECT Date,Start,Finish FROM PayData";
+            string sql = "SELECT * FROM PayData"; //uncomment when uploading from file
+            da = new MySqlDataAdapter(sql, conn);
+            MySqlCommandBuilder cb = new MySqlCommandBuilder(da);
             ds = new DataSet();
             conn.Open();
             da.Fill(ds, "PayData");
@@ -232,14 +222,14 @@ namespace PayTracker
                 string[] temp = record.Split(',');
                 try
                 {
-                    conn = new SqlConnection(connStr);
+                    conn = new MySqlConnection(connStr);
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand();
+                    MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conn;
-                    sql = "SELECT [Date] FROM [PayData] WHERE [Date] = '" + temp[0] + "'";
+                    sql = "SELECT Date FROM PayData WHERE Date = '" + temp[0] + "'";
                     cmd.CommandText = sql;
                     DataRow dr = ds.Tables["PayData"].NewRow();
-                    SqlDataReader dataReader = cmd.ExecuteReader();
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
 
                     if (dataReader.HasRows)
                     {
@@ -248,10 +238,10 @@ namespace PayTracker
                     }
                     else
                     {
-                        dr["Date"] = DateTime.ParseExact(temp[0], "yyyy/MM/dd", CultureInfo.InvariantCulture); ;
+                        dr["Date"] = DateTime.ParseExact(temp[0], "yyyy/MM/dd", CultureInfo.InvariantCulture);
                         dr["Start"] = temp[1];
                         dr["Finish"] = temp[2];
-                        dr["Hours"] = Convert.ToDouble(temp[3]);
+                        dr["Hours"] = TimeSpan.FromHours(Convert.ToDouble(temp[3]));
                         dr["Rate"] = Convert.ToDouble(temp[4]);
                         dr["Pay"] = Convert.ToDouble(temp[5]);
                         dr["Paid"] = Convert.ToDouble(temp[6]);
@@ -262,12 +252,13 @@ namespace PayTracker
                         dg1.Columns[0].ValueType = typeof(DateTime);
                         ds.Tables["PayData"].Rows.Add(dr);
                         da.Update(ds, "PayData");
+                        formatGrid();
+                        populateGrid();
                         dg1.ClearSelection();
                     }
                 }
                 catch (SqlException ex)
                 {
-
                     if (conn != null)
                     {
                         conn.Close();

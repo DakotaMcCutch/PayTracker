@@ -35,8 +35,6 @@
             this.cmdImport = new System.Windows.Forms.Button();
             this.lblTotalH = new System.Windows.Forms.Label();
             this.txtTHour = new System.Windows.Forms.TextBox();
-            this.txtTRate = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.txtTPay = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtTPaid = new System.Windows.Forms.TextBox();
@@ -68,7 +66,6 @@
             this.dg1.Location = new System.Drawing.Point(222, 9);
             this.dg1.MultiSelect = false;
             this.dg1.Name = "dg1";
-            this.dg1.ReadOnly = true;
             this.dg1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dg1.Size = new System.Drawing.Size(950, 264);
             this.dg1.TabIndex = 85;
@@ -101,26 +98,9 @@
             this.txtTHour.Size = new System.Drawing.Size(100, 20);
             this.txtTHour.TabIndex = 87;
             // 
-            // txtTRate
-            // 
-            this.txtTRate.Location = new System.Drawing.Point(16, 70);
-            this.txtTRate.Name = "txtTRate";
-            this.txtTRate.ReadOnly = true;
-            this.txtTRate.Size = new System.Drawing.Size(100, 20);
-            this.txtTRate.TabIndex = 89;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.TabIndex = 88;
-            this.label1.Text = "Total Rate";
-            // 
             // txtTPay
             // 
-            this.txtTPay.Location = new System.Drawing.Point(16, 110);
+            this.txtTPay.Location = new System.Drawing.Point(16, 70);
             this.txtTPay.Name = "txtTPay";
             this.txtTPay.ReadOnly = true;
             this.txtTPay.Size = new System.Drawing.Size(100, 20);
@@ -129,7 +109,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 93);
+            this.label2.Location = new System.Drawing.Point(13, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 13);
             this.label2.TabIndex = 90;
@@ -137,7 +117,7 @@
             // 
             // txtTPaid
             // 
-            this.txtTPaid.Location = new System.Drawing.Point(16, 150);
+            this.txtTPaid.Location = new System.Drawing.Point(16, 110);
             this.txtTPaid.Name = "txtTPaid";
             this.txtTPaid.ReadOnly = true;
             this.txtTPaid.Size = new System.Drawing.Size(100, 20);
@@ -146,7 +126,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 133);
+            this.label3.Location = new System.Drawing.Point(13, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 92;
@@ -154,7 +134,7 @@
             // 
             // txtBalance
             // 
-            this.txtBalance.Location = new System.Drawing.Point(16, 189);
+            this.txtBalance.Location = new System.Drawing.Point(16, 149);
             this.txtBalance.Name = "txtBalance";
             this.txtBalance.ReadOnly = true;
             this.txtBalance.Size = new System.Drawing.Size(100, 20);
@@ -163,7 +143,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 173);
+            this.label4.Location = new System.Drawing.Point(13, 133);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 13);
             this.label4.TabIndex = 94;
@@ -180,14 +160,13 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtTPay);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtTRate);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtTHour);
             this.Controls.Add(this.lblTotalH);
             this.Controls.Add(this.dg1);
             this.Controls.Add(this.cmdImport);
             this.Controls.Add(this.cmdBack);
             this.Name = "Data";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Data";
             this.Load += new System.EventHandler(this.Data_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
@@ -205,8 +184,6 @@
         private System.Windows.Forms.Button cmdImport;
         private System.Windows.Forms.Label lblTotalH;
         private System.Windows.Forms.TextBox txtTHour;
-        private System.Windows.Forms.TextBox txtTRate;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtTPay;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtTPaid;
