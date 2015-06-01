@@ -5,9 +5,12 @@ I had to backtrack a bit due to the unforeseen compatibility issues with the var
 To Do
 ===========
 <ul>
-
+<li>Add More Themes</li>
+<li>Backup text file</li>
+<li>make more server options</li>
 </ul>
 Issues
 ===========
 <ul>
+<li>connection issues depending on server</li>
 </ul>
