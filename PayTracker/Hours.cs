@@ -282,7 +282,7 @@ namespace PayTracker
             {
                 if (validPrimary("i"))
                 {
-                    string connStr = "id=Owner;persistsecurityinfo=True;database=Data;allowuservariables=True;pooling=False";
+                    string connStr = "server=192.168.2.39;user id=Owner;password=gseHHt6B;database=Data;persistsecurityinfo=True";
                     MySqlConnection conn = new MySqlConnection(connStr);
                     conn.Open();
                     MySqlCommand cmd = new MySqlCommand();
