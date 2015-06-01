@@ -247,14 +247,13 @@ namespace PayTracker
                     {
                         if (validPrimary("u"))
                         {
+                            da.Fill(ds, "PayData");
                                 DataRow dr = ds.Tables[0].Rows[i];
                                 dr["T-Hours"] = totalHours;
                                 dr["T-Pay"] = totalPay;
                                 dr["T-Paid"] = totalPaid;
                                 dr["Balance"] = balance;
-                               
                                 da.Update(ds, "PayData");
-                                ds.AcceptChanges();
                                 formatGrid();
                                 dg1.ClearSelection();
                         }
@@ -376,7 +375,9 @@ namespace PayTracker
                 {
                     try
                     {
+                        da.Fill(ds, "PayData");
                         ds.Tables[0].Rows[rowIndex].Delete();
+                        
                         da.Update(ds, "PayData");
                     }
                     catch(System.Data.DBConcurrencyException)
