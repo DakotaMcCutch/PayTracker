@@ -247,6 +247,7 @@ namespace PayTracker
                     {
                         if (validPrimary("u"))
                         {
+<<<<<<< HEAD
                             da.Fill(ds, "PayData");
                                 DataRow dr = ds.Tables[0].Rows[i];
                                 dr["T-Hours"] = totalHours;
@@ -256,6 +257,16 @@ namespace PayTracker
                                 da.Update(ds, "PayData");
                                 formatGrid();
                                 dg1.ClearSelection();
+=======
+                            DataRow dr = ds.Tables[0].Rows[i];
+                            dr["T-Hours"] = totalHours;
+                            dr["T-Pay"] = totalPay;
+                            dr["T-Paid"] = totalPaid;
+                            dr["Balance"] = balance;
+                            da.Update(ds, "PayData");
+                            formatGrid();
+                            dg1.ClearSelection();
+>>>>>>> 7aea5938f94a7331af423a714155452803c3ad54
                         }
                     }
                 }
@@ -288,7 +299,11 @@ namespace PayTracker
                     conn.Open();
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conn;
+<<<<<<< HEAD
                     string sql = "Select Date, Start, Finish FROM PayData WHERE Date = '" + dtpDate.Value + "'AND Start = '" + dtpStart.Value + "'AND Finish ='" + dtpFinish.Value + "'";
+=======
+                    string sql = "Select [Date], [Start], [Finish] FROM [PayData] WHERE [Date] = '" + dtpDate.Value + "'AND [Start] = '" + dtpStart.Value + "'AND [Finish] ='" + dtpFinish.Value + "'";
+>>>>>>> 7aea5938f94a7331af423a714155452803c3ad54
                     cmd.CommandText = sql;
                     DataRow dr = ds.Tables["PayData"].NewRow();
                     MySqlDataReader dataReader = cmd.ExecuteReader();
@@ -433,11 +448,19 @@ namespace PayTracker
             string connStr = "server=192.168.2.39;user id=Owner;password=gseHHt6B;database=Data;persistsecurityinfo=True";
             try
             {
+<<<<<<< HEAD
                 conn = new MySqlConnection(connStr);
                 //string sql = "SELECT Date,[Start],[Finish] FROM [PayData]";
                 string sql = "SELECT * FROM PayData"; //uncomment when uploading from file
                 da = new MySqlDataAdapter(sql, conn);
                 MySqlCommandBuilder cb = new MySqlCommandBuilder(da);
+=======
+                conn = new SqlConnection(connStr);
+                //string sql = "SELECT [Date],[Start],[Finish] FROM [PayData]";
+                string sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file
+                da = new SqlDataAdapter(sql, conn);
+                SqlCommandBuilder cb = new SqlCommandBuilder(da);
+>>>>>>> 7aea5938f94a7331af423a714155452803c3ad54
                 ds = new DataSet();
                 conn.Open();
                 da.Fill(ds, "PayData");
@@ -554,7 +577,11 @@ namespace PayTracker
                     conn.Open();
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conn;
+<<<<<<< HEAD
                     sql = "SELECT Date FROM PayData WHERE Date = '" + temp[0] + "'";
+=======
+                    sql = "SELECT [Date] FROM [PayData] WHERE [Date] = '" + temp[0] + "'";
+>>>>>>> 7aea5938f94a7331af423a714155452803c3ad54
                     cmd.CommandText = sql;
                     DataRow dr = ds.Tables["PayData"].NewRow();
                     MySqlDataReader dataReader = cmd.ExecuteReader();
