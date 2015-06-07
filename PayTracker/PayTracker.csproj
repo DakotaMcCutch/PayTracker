@@ -13,11 +13,10 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-<<<<<<< HEAD
     <PublishUrl>L:\</PublishUrl>
-=======
+
     <PublishUrl>C:\Users\Dakota\Desktop\file\</PublishUrl>
->>>>>>> 7aea5938f94a7331af423a714155452803c3ad54
+
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
