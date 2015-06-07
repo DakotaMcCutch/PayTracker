@@ -1,0 +1,14 @@
+D:\DEV\PayTracker\PayTracker\bin\Release\PayTracker.exe.config
+D:\DEV\PayTracker\PayTracker\bin\Release\Data.mdf
+D:\DEV\PayTracker\PayTracker\bin\Release\Data_log.ldf
+D:\DEV\PayTracker\PayTracker\bin\Release\Pay.txt
+D:\DEV\PayTracker\PayTracker\bin\Release\PayTracker.exe
+D:\DEV\PayTracker\PayTracker\bin\Release\PayTracker.pdb
+D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.csprojResolveAssemblyReference.cache
+D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.Hours.resources
+D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.Paid.resources
+D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.Properties.Resources.resources
+D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.Start.resources
+D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.csproj.GenerateResource.Cache
+D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.exe
+D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.pdb
