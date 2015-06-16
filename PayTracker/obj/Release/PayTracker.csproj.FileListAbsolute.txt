@@ -12,3 +12,10 @@ D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.Start.resources
 D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.csproj.GenerateResource.Cache
 D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.exe
 D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.pdb
+D:\DEV\PayTracker\PayTracker\bin\Release\App.config
+D:\DEV\PayTracker\PayTracker\bin\Release\PayTracker.exe.manifest
+D:\DEV\PayTracker\PayTracker\bin\Release\PayTracker.application
+D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.Data.resources
+D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.firstStart.resources
+D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.exe.manifest
+D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.application

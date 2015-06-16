@@ -47,14 +47,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PayTracker.exe" size="49152">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PayTracker.exe" size="51200">
       <assemblyIdentity name="PayTracker" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>DatCPWxKsNMLvejNfU03Rz/BauCcd1eopzexJKRWDik=</dsig:DigestValue>
+        <dsig:DigestValue>MZrAxEizEM9C1EKVEfaiGUIUG9slzkI3lB67o7AR5Hw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -85,13 +85,13 @@
       <dsig:DigestValue>MV+MGjzNcOCuOk1hEZHyH0Px7Pyj2fJjicdNz1FRgko=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="PayTracker.exe.config" size="3359">
+  <file name="PayTracker.exe.config" size="3571">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>sIDsurqA1BawM3UsVwnFM7IitIdwoAZMwujEC7CSUow=</dsig:DigestValue>
+      <dsig:DigestValue>JKvD/Pfr1o1fk1A2doCkjBYUEH/M6htSSVXAMC/pZVA=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

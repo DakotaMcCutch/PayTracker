@@ -13,10 +13,23 @@ namespace PayTracker
 
         private void Start_Load(object sender, EventArgs e)
         {
+           
+            
             FormClosing += Start_FormClosing;
             cbTheme.SelectedValueChanged += cbTheme_SelectedValueChanged;
             cbTheme.SelectedItem = Properties.Settings.Default.lastSelect;
             setTheme();
+            if (Properties.Settings.Default.FirstStart == true)
+            {
+
+                this.Hide();
+                firstStart fs = new firstStart();
+                fs.Show();
+                //if (fs != null)
+                //{
+                //    this.Show();
+                //}
+            }
         }
 
         private void cbTheme_SelectedValueChanged(object sender, EventArgs e)

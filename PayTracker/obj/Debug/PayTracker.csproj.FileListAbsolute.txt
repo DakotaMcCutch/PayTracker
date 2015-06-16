@@ -17,3 +17,5 @@ D:\DEV\PayTracker\PayTracker\bin\Debug\PayTracker.application
 D:\DEV\PayTracker\PayTracker\obj\Debug\PayTracker.exe.manifest
 D:\DEV\PayTracker\PayTracker\obj\Debug\PayTracker.application
 D:\DEV\PayTracker\PayTracker\bin\Debug\Pay.txt
+D:\DEV\PayTracker\PayTracker\obj\Debug\PayTracker.firstStart.resources
+D:\DEV\PayTracker\PayTracker\bin\Debug\App.config
