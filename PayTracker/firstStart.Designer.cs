@@ -78,6 +78,7 @@
             this.Name = "firstStart";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "firstStart";
+            this.Load += new System.EventHandler(this.firstStart_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

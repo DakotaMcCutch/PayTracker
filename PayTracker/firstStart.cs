@@ -15,8 +15,6 @@ namespace PayTracker
         public firstStart()
         {
             InitializeComponent();
-            setTheme();
-            FormClosing += firstStart_FormClosing;
         }
 
         void firstStart_FormClosing(object sender, FormClosingEventArgs e)
@@ -27,6 +25,7 @@ namespace PayTracker
             }
             if (System.Windows.Forms.MessageBox.Show(" Do you want to quit?          ", "Quit...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
+                Properties.Settings.Default.Save();
                 Dispose(true);
                 Application.Exit();
             }
@@ -51,6 +50,7 @@ namespace PayTracker
         {
             Properties.Settings.Default.DatabaseType = "Local";
             Properties.Settings.Default.FirstStart = false;
+            Properties.Settings.Default.Save();
             this.Hide();
             Start s = new Start();
             s.Show();
@@ -62,9 +62,16 @@ namespace PayTracker
         {
             Properties.Settings.Default.DatabaseType = "MySql";
             Properties.Settings.Default.FirstStart = false;
+            Properties.Settings.Default.Save();
             this.Hide();
             Start s = new Start();
             s.Show();
+        }
+
+        private void firstStart_Load(object sender, EventArgs e)
+        {
+            setTheme();
+            FormClosing += firstStart_FormClosing;
         }
     }
 }

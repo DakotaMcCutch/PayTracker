@@ -13,7 +13,14 @@ namespace PayTracker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Start());
+            if (Properties.Settings.Default.FirstStart == true)
+            {
+                Application.Run(new firstStart());
+            }
+            else
+            {
+                Application.Run(new Start());
+            }
         }
     }
 }

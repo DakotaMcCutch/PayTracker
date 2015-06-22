@@ -47,14 +47,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PayTracker.exe" size="51200">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PayTracker.exe" size="51712">
       <assemblyIdentity name="PayTracker" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>MZrAxEizEM9C1EKVEfaiGUIUG9slzkI3lB67o7AR5Hw=</dsig:DigestValue>
+        <dsig:DigestValue>qut/+Xnc69X3oIAkeTKWO/v2uK4eW9ii5xtLIYktpQM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
