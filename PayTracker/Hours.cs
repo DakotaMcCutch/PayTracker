@@ -12,11 +12,11 @@ namespace PayTracker
 {
     public partial class Hours : Form
     {
-        //private SqlConnection conn = null;
-        //private SqlDataAdapter da = null;
+        private SqlConnection conn = null;
+        private SqlDataAdapter da = null;
         //id=Owner;database=Data;persistsecurityinfo=True;allowuservariables=True
-        private MySqlConnection conn = null;
-        private MySqlDataAdapter da = null;
+        //private MySqlConnection conn = null;
+        //private MySqlDataAdapter da = null;
         private DataSet ds = null;
         private int rowIndex = -1;
         private string date;
@@ -286,24 +286,24 @@ namespace PayTracker
             {
                 if (validPrimary("i"))
                 {
-                    //string connStr = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True";
-                    //SqlConnection conn = new SqlConnection(connStr);
-                    //conn.Open();
-                    //SqlCommand cmd = new SqlCommand();
-                    //cmd.Connection = conn;
-                    //string sql = "Select [Date], [Start], [Finish] FROM [PayData] WHERE [Date] = '" + dtpDate.Value + "'AND [Start] = '" + dtpStart.Value + "'AND [Finish] ='" + dtpFinish.Value + "'";
-                    //cmd.CommandText = sql;
-                    //DataRow dr = ds.Tables["PayData"].NewRow();
-                    //SqlDataReader dataReader = cmd.ExecuteReader();
-                    string connStr = "server=192.168.2.39;user id=Owner;password=qwerty;database=Data;persistsecurityinfo=True;allowuservariables=True";
-                    MySqlConnection conn = new MySqlConnection(connStr);
+                    string connStr = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True";
+                    SqlConnection conn = new SqlConnection(connStr);
                     conn.Open();
-                    MySqlCommand cmd = new MySqlCommand();
+                    SqlCommand cmd = new SqlCommand();
                     cmd.Connection = conn;
-                    string sql = "Select Date, Start, Finish FROM PayData WHERE Date = '" + dtpDate.Value + "'AND Start = '" + dtpStart.Value + "'AND Finish ='" + dtpFinish.Value + "'";
+                    string sql = "Select [Date], [Start], [Finish] FROM [PayData] WHERE [Date] = '" + dtpDate.Value + "'AND [Start] = '" + dtpStart.Value + "'AND [Finish] ='" + dtpFinish.Value + "'";
                     cmd.CommandText = sql;
                     DataRow dr = ds.Tables["PayData"].NewRow();
-                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    SqlDataReader dataReader = cmd.ExecuteReader();
+                   // string connStr = "server=192.168.2.39;user id=Owner;password=qwerty;database=Data;persistsecurityinfo=True;allowuservariables=True";
+                    //MySqlConnection conn = new MySqlConnection(connStr);
+                    //conn.Open();
+                    //MySqlCommand cmd = new MySqlCommand();
+                    //cmd.Connection = conn;
+                    //string sql = "Select Date, Start, Finish FROM PayData WHERE Date = '" + dtpDate.Value + "'AND Start = '" + dtpStart.Value + "'AND Finish ='" + dtpFinish.Value + "'";
+                    //cmd.CommandText = sql;
+                    //DataRow dr = ds.Tables["PayData"].NewRow();
+                    //MySqlDataReader dataReader = cmd.ExecuteReader();
 
                     if (dataReader.HasRows)
                     {
@@ -438,25 +438,25 @@ namespace PayTracker
             string connStr = "server=192.168.2.39;user id=Owner;password=qwerty;database=Data;persistsecurityinfo=True;allowuservariables=True";
             try
             {
-                //conn = new SqlConnection(connStr);
-                ////string sql = "SELECT [Date],[Start],[Finish] FROM [PayData]";
-                //string sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file
-                //da = new SqlDataAdapter(sql, conn);
-                //SqlCommandBuilder cb = new SqlCommandBuilder(da);
-                //ds = new DataSet();
-                //conn.Open();
-                //da.Fill(ds, "PayData");
-                //conn.Close();
-
-                conn = new MySqlConnection(connStr);
+                conn = new SqlConnection(connStr);
                 //string sql = "SELECT [Date],[Start],[Finish] FROM [PayData]";
-                string sql = "SELECT * FROM PayData"; //uncomment when uploading from file
-                da = new MySqlDataAdapter(sql, conn);
-                MySqlCommandBuilder cb = new MySqlCommandBuilder(da);
+                string sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file
+                da = new SqlDataAdapter(sql, conn);
+                SqlCommandBuilder cb = new SqlCommandBuilder(da);
                 ds = new DataSet();
                 conn.Open();
                 da.Fill(ds, "PayData");
                 conn.Close();
+
+                //conn = new MySqlConnection(connStr);
+                ////string sql = "SELECT [Date],[Start],[Finish] FROM [PayData]";
+                //string sql = "SELECT * FROM PayData"; //uncomment when uploading from file
+                //da = new MySqlDataAdapter(sql, conn);
+                //MySqlCommandBuilder cb = new MySqlCommandBuilder(da);
+                //ds = new DataSet();
+                //conn.Open();
+                //da.Fill(ds, "PayData");
+                //conn.Close();
 
                 //bind and display
                 bindingSource1.DataSource = ds;
@@ -542,27 +542,27 @@ namespace PayTracker
 
         private void getFileData()
         {
-            //string connStr = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;Connect Timeout=30";
-            //conn = new SqlConnection(connStr);
-            ////string sql = "SELECT [Date],[Start],[Finish] FROM [PayData]";
-            //string sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file
-            //da = new SqlDataAdapter(sql, conn);
-            //SqlCommandBuilder cb = new SqlCommandBuilder(da);
-            //ds = new DataSet();
-            //conn.Open();
-            //da.Fill(ds, "PayData");
-            //conn.Close();
-
-            string connStr = "server=192.168.2.39;user id=Owner;password=qwerty;database=Data;persistsecurityinfo=True;allowuservariables=True";
-            conn = new MySqlConnection(connStr);
+            string connStr = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;Connect Timeout=30";
+            conn = new SqlConnection(connStr);
             //string sql = "SELECT [Date],[Start],[Finish] FROM [PayData]";
-            string sql = "SELECT * FROM PayData"; //uncomment when uploading from file
-            da = new MySqlDataAdapter(sql, conn);
-            MySqlCommandBuilder cb = new MySqlCommandBuilder(da);
+            string sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file
+            da = new SqlDataAdapter(sql, conn);
+            SqlCommandBuilder cb = new SqlCommandBuilder(da);
             ds = new DataSet();
             conn.Open();
             da.Fill(ds, "PayData");
             conn.Close();
+
+            //string connStr = "server=192.168.2.39;user id=Owner;password=qwerty;database=Data;persistsecurityinfo=True;allowuservariables=True";
+            //conn = new MySqlConnection(connStr);
+            ////string sql = "SELECT [Date],[Start],[Finish] FROM [PayData]";
+            //string sql = "SELECT * FROM PayData"; //uncomment when uploading from file
+            //da = new MySqlDataAdapter(sql, conn);
+            //MySqlCommandBuilder cb = new MySqlCommandBuilder(da);
+            //ds = new DataSet();
+            //conn.Open();
+            //da.Fill(ds, "PayData");
+            //conn.Close();
 
             //bind and display
             bindingSource1.DataSource = ds;
@@ -576,23 +576,23 @@ namespace PayTracker
                 string[] temp = record.Split(',');
                 try
                 {
-                    //conn = new SqlConnection(connStr);
-                    //conn.Open();
-                    //SqlCommand cmd = new SqlCommand();
-                    //cmd.Connection = conn;
-                    //sql = "SELECT [Date] FROM [PayData] WHERE [Date] = '" + temp[0] + "'";
-                    //cmd.CommandText = sql;
-                    //DataRow dr = ds.Tables["PayData"].NewRow();
-                    //SqlDataReader dataReader = cmd.ExecuteReader();
-
-                    conn = new MySqlConnection(connStr);
+                    conn = new SqlConnection(connStr);
                     conn.Open();
-                    MySqlCommand cmd = new MySqlCommand();
+                    SqlCommand cmd = new SqlCommand();
                     cmd.Connection = conn;
-                    sql = "SELECT Date FROM PayData WHERE Date = '" + temp[0] + "'";
+                    sql = "SELECT [Date] FROM [PayData] WHERE [Date] = '" + temp[0] + "'";
                     cmd.CommandText = sql;
                     DataRow dr = ds.Tables["PayData"].NewRow();
-                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    SqlDataReader dataReader = cmd.ExecuteReader();
+
+                    //conn = new MySqlConnection(connStr);
+                    //conn.Open();
+                    //MySqlCommand cmd = new MySqlCommand();
+                    //cmd.Connection = conn;
+                    //sql = "SELECT Date FROM PayData WHERE Date = '" + temp[0] + "'";
+                    //cmd.CommandText = sql;
+                    //DataRow dr = ds.Tables["PayData"].NewRow();
+                    //MySqlDataReader dataReader = cmd.ExecuteReader();
 
                     if (dataReader.HasRows)
                     {

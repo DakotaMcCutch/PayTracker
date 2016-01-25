@@ -42,19 +42,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
-      <assemblyIdentity name="MySql.Data" version="6.9.6.0" publicKeyToken="C5687FC88969C44D" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MySql.Data.dll" size="457728">
+      <assemblyIdentity name="MySql.Data" version="6.9.8.0" publicKeyToken="C5687FC88969C44D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>vZOt5pn+YIjqzABheL5YRnsrxRe1pFgyD4tfa0entVA=</dsig:DigestValue>
+      </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PayTracker.exe" size="51712">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PayTracker.exe" size="51136">
       <assemblyIdentity name="PayTracker" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>qut/+Xnc69X3oIAkeTKWO/v2uK4eW9ii5xtLIYktpQM=</dsig:DigestValue>
+        <dsig:DigestValue>T7CdeiS0WVdjth+7ODsG2u6/Vu4s6uvpmwtP1/XNvuI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -64,16 +71,16 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>WHU8dUyjZoGXB2OoQje2tuOFzCBAhf9pGiHo1dX6tPA=</dsig:DigestValue>
+      <dsig:DigestValue>dOvwWQGeO5aUkhEwt2eNfyaSoGyNlLtbZ24C/R8eSII=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Data_log.ldf" size="802816" writeableType="applicationData">
+  <file name="Data_log.ldf" size="516096" writeableType="applicationData">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Kj546WL37swFJhO3LNWgzwFBuG/wnjPdtCRfZRZTnzw=</dsig:DigestValue>
+      <dsig:DigestValue>O2u5i5wcAHe13kLyjJ9/ikkemXzhbqnEWzHR197rAvI=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Pay.txt" size="7544">
@@ -85,13 +92,13 @@
       <dsig:DigestValue>MV+MGjzNcOCuOk1hEZHyH0Px7Pyj2fJjicdNz1FRgko=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="PayTracker.exe.config" size="3571">
+  <file name="PayTracker.exe.config" size="3557">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>JKvD/Pfr1o1fk1A2doCkjBYUEH/M6htSSVXAMC/pZVA=</dsig:DigestValue>
+      <dsig:DigestValue>m1LeGwsGi4qzCaANG095+E6Id6G6RVuXQrGkmpVqIaQ=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
