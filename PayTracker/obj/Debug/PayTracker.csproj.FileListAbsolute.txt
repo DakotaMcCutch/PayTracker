@@ -19,10 +19,14 @@ D:\DEV\PayTracker\PayTracker\obj\Debug\PayTracker.application
 D:\DEV\PayTracker\PayTracker\bin\Debug\Pay.txt
 D:\DEV\PayTracker\PayTracker\obj\Debug\PayTracker.firstStart.resources
 D:\DEV\PayTracker\PayTracker\bin\Debug\App.config
+C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\App.config
+C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\Data.mdf
+C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\Data_log.ldf
+C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\Pay.txt
 C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\PayTracker.exe.config
-C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.exe
-C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.pdb
-C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.csprojResolveAssemblyReference.cache
+C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\PayTracker.exe
+C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\PayTracker.pdb
+C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\MySql.Data.dll
 C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.Data.resources
 C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.firstStart.resources
 C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.Hours.resources
@@ -30,14 +34,11 @@ C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\ob
 C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.Properties.Resources.resources
 C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.Start.resources
 C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.csproj.GenerateResource.Cache
-C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\App.config
-C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\Data.mdf
-C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\Data_log.ldf
-C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\Pay.txt
+C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.exe
+C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.pdb
 C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\PayTracker.exe.manifest
 C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\PayTracker.application
-C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\PayTracker.exe
-C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\PayTracker.pdb
-C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Debug\MySql.Data.dll
+C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.csprojResolveAssemblyReference.cache
+C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.TrustInfo.xml
 C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.exe.manifest
 C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.application

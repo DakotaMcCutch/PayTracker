@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using PayTracker.Properties;
 
 namespace PayTracker
 {
@@ -15,19 +16,17 @@ namespace PayTracker
         {
             FormClosing += Start_FormClosing;
             cbTheme.SelectedValueChanged += cbTheme_SelectedValueChanged;
-            cbTheme.SelectedItem = Properties.Settings.Default.lastSelect;
+            cbTheme.SelectedItem = Settings.Default.lastSelect;
             setTheme();
-           
         }
 
         private void startUp()
         {
-            bool fStart = Properties.Settings.Default.FirstStart;
-            if (fStart == true)
+            var fStart = Settings.Default.FirstStart;
+            if (fStart)
             {
-
-                firstStart fs = new firstStart();
-                this.Hide();
+                var fs = new firstStart();
+                Hide();
 
                 fs.Show();
                 //if (fs != null)
@@ -46,43 +45,43 @@ namespace PayTracker
         {
             if (cbTheme.SelectedItem.ToString() == "Dark")
             {
-                Properties.Settings.Default.backColor = Color.Black;
-                Properties.Settings.Default.foreColor = Color.GreenYellow;
-                Properties.Settings.Default.lastSelect = cbTheme.SelectedItem.ToString();
-                Properties.Settings.Default.buttonForeColor = Color.Black;
-                Properties.Settings.Default.headerBack = Color.Black;
-                Properties.Settings.Default.headerFore = Color.GreenYellow;
-                Properties.Settings.Default.selectionHeaderBack = Color.Firebrick;
-                Properties.Settings.Default.selectionHeaderFore = Color.Yellow;
-                Properties.Settings.Default.cellBack = Color.Black;
-                Properties.Settings.Default.cellFore = Color.GreenYellow;
-                Properties.Settings.Default.selectionCellBack = Color.Firebrick;
-                Properties.Settings.Default.selectionCellFore = Color.Yellow;
-                Properties.Settings.Default.Save();
+                Settings.Default.backColor = Color.Black;
+                Settings.Default.foreColor = Color.GreenYellow;
+                Settings.Default.lastSelect = cbTheme.SelectedItem.ToString();
+                Settings.Default.buttonForeColor = Color.Black;
+                Settings.Default.headerBack = Color.Black;
+                Settings.Default.headerFore = Color.GreenYellow;
+                Settings.Default.selectionHeaderBack = Color.Firebrick;
+                Settings.Default.selectionHeaderFore = Color.Yellow;
+                Settings.Default.cellBack = Color.Black;
+                Settings.Default.cellFore = Color.GreenYellow;
+                Settings.Default.selectionCellBack = Color.Firebrick;
+                Settings.Default.selectionCellFore = Color.Yellow;
+                Settings.Default.Save();
             }
             if (cbTheme.SelectedItem.ToString() == "Normal")
             {
-                Properties.Settings.Default.backColor = SystemColors.Control;
-                Properties.Settings.Default.foreColor = SystemColors.ControlText;
-                Properties.Settings.Default.lastSelect = cbTheme.SelectedItem.ToString();
-                Properties.Settings.Default.buttonForeColor = SystemColors.ControlText;
-                Properties.Settings.Default.headerBack = SystemColors.Control;
-                Properties.Settings.Default.headerFore = SystemColors.ControlText;
-                Properties.Settings.Default.selectionHeaderBack = SystemColors.Highlight;
-                Properties.Settings.Default.selectionHeaderFore = SystemColors.HighlightText;
-                Properties.Settings.Default.cellBack = SystemColors.Window;
-                Properties.Settings.Default.cellFore = SystemColors.ControlText;
-                Properties.Settings.Default.selectionCellBack = SystemColors.Highlight;
-                Properties.Settings.Default.selectionCellFore = SystemColors.HighlightText;
-                Properties.Settings.Default.Save();
+                Settings.Default.backColor = SystemColors.Control;
+                Settings.Default.foreColor = SystemColors.ControlText;
+                Settings.Default.lastSelect = cbTheme.SelectedItem.ToString();
+                Settings.Default.buttonForeColor = SystemColors.ControlText;
+                Settings.Default.headerBack = SystemColors.Control;
+                Settings.Default.headerFore = SystemColors.ControlText;
+                Settings.Default.selectionHeaderBack = SystemColors.Highlight;
+                Settings.Default.selectionHeaderFore = SystemColors.HighlightText;
+                Settings.Default.cellBack = SystemColors.Window;
+                Settings.Default.cellFore = SystemColors.ControlText;
+                Settings.Default.selectionCellBack = SystemColors.Highlight;
+                Settings.Default.selectionCellFore = SystemColors.HighlightText;
+                Settings.Default.Save();
             }
 
-            this.BackColor = Properties.Settings.Default.backColor;
-            this.ForeColor = Properties.Settings.Default.foreColor;
+            BackColor = Settings.Default.backColor;
+            ForeColor = Settings.Default.foreColor;
             cmdHours.ForeColor = SystemColors.ControlText;
             cmdPaid.ForeColor = SystemColors.ControlText;
             cmdAll.ForeColor = SystemColors.ControlText;
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
         }
 
         private void Start_FormClosing(object sender, FormClosingEventArgs e)
@@ -91,9 +90,11 @@ namespace PayTracker
             {
                 return;
             }
-            if (System.Windows.Forms.MessageBox.Show(" Do you want to quit?          ", "Quit...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            if (
+                MessageBox.Show(" Do you want to quit?          ", "Quit...", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Properties.Settings.Default.Save();
+                Settings.Default.Save();
                 Dispose(true);
                 Application.Exit();
             }
@@ -105,22 +106,23 @@ namespace PayTracker
 
         private void cmdHours_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Hours h = new Hours();
+            Hide();
+            var h = new Hours();
             h.Show();
         }
 
         private void cmdPaid_Click(object sender, EventArgs e)
         {
-            this.Hide(); ;
-            Paid p = new Paid();
+            Hide();
+            ;
+            var p = new Paid();
             p.Show();
         }
 
         private void cmdAll_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Data d = new Data();
+            Hide();
+            var d = new Data();
             d.Show();
         }
     }

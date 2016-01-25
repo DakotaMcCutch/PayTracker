@@ -6,14 +6,15 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using PayTracker.Properties;
 
 namespace PayTracker
 {
     public partial class Data : Form
     {
-        private SqlConnection conn = null;
-        private SqlDataAdapter da = null;
-        private DataSet ds = null;
+        private SqlConnection conn;
+        private SqlDataAdapter da;
+        private DataSet ds;
         private int rowIndex = -1;
 
         public Data()
@@ -42,23 +43,23 @@ namespace PayTracker
 
         public void setTheme()
         {
-            Button[] cmd = { cmdBack, cmdImport };
-            this.BackColor = Properties.Settings.Default.backColor;
-            this.ForeColor = Properties.Settings.Default.foreColor;
-            foreach (Button b in cmd)
+            Button[] cmd = {cmdBack, cmdImport};
+            BackColor = Settings.Default.backColor;
+            ForeColor = Settings.Default.foreColor;
+            foreach (var b in cmd)
             {
-                b.ForeColor = Properties.Settings.Default.buttonForeColor;
+                b.ForeColor = Settings.Default.buttonForeColor;
             }
-            dg1.ColumnHeadersDefaultCellStyle.BackColor = Properties.Settings.Default.headerBack;
-            dg1.ColumnHeadersDefaultCellStyle.ForeColor = Properties.Settings.Default.headerFore;
-            dg1.RowHeadersDefaultCellStyle.BackColor = Properties.Settings.Default.headerBack;
-            dg1.RowHeadersDefaultCellStyle.ForeColor = Properties.Settings.Default.headerFore;
-            dg1.RowHeadersDefaultCellStyle.SelectionBackColor = Properties.Settings.Default.selectionHeaderBack;
-            dg1.RowHeadersDefaultCellStyle.SelectionForeColor = Properties.Settings.Default.selectionHeaderFore;
-            dg1.DefaultCellStyle.BackColor = Properties.Settings.Default.cellBack;
-            dg1.DefaultCellStyle.ForeColor = Properties.Settings.Default.cellFore;
-            dg1.DefaultCellStyle.SelectionBackColor = Properties.Settings.Default.selectionCellBack;
-            dg1.DefaultCellStyle.SelectionForeColor = Properties.Settings.Default.selectionCellFore;
+            dg1.ColumnHeadersDefaultCellStyle.BackColor = Settings.Default.headerBack;
+            dg1.ColumnHeadersDefaultCellStyle.ForeColor = Settings.Default.headerFore;
+            dg1.RowHeadersDefaultCellStyle.BackColor = Settings.Default.headerBack;
+            dg1.RowHeadersDefaultCellStyle.ForeColor = Settings.Default.headerFore;
+            dg1.RowHeadersDefaultCellStyle.SelectionBackColor = Settings.Default.selectionHeaderBack;
+            dg1.RowHeadersDefaultCellStyle.SelectionForeColor = Settings.Default.selectionHeaderFore;
+            dg1.DefaultCellStyle.BackColor = Settings.Default.cellBack;
+            dg1.DefaultCellStyle.ForeColor = Settings.Default.cellFore;
+            dg1.DefaultCellStyle.SelectionBackColor = Settings.Default.selectionCellBack;
+            dg1.DefaultCellStyle.SelectionForeColor = Settings.Default.selectionCellFore;
         }
 
         private void dtpDate_ValueChanged(object sender, EventArgs e)
@@ -68,9 +69,9 @@ namespace PayTracker
 
         private void cmdBack_Click(object sender, EventArgs e)
         {
-            Start s = new Start();
+            var s = new Start();
             s.Show();
-            this.Hide();
+            Hide();
         }
 
         public void formatGrid()
@@ -91,7 +92,9 @@ namespace PayTracker
             {
                 return;
             }
-            if (System.Windows.Forms.MessageBox.Show(" Do you want to quit?          ", "Quit...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            if (
+                MessageBox.Show(" Do you want to quit?          ", "Quit...", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Dispose(true);
                 Application.Exit();
@@ -110,15 +113,20 @@ namespace PayTracker
 
         private void getData()
         {
-            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Pay", "T-Paid", "Balance" };
-            string connStr = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;";
+            string[] columns =
+            {
+                "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Pay", "T-Paid",
+                "Balance"
+            };
+            var connStr =
+                "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;";
             try
             {
                 conn = new SqlConnection(connStr);
                 //string sql = "SELECT [Date],[Start],[Finish] FROM [PayData]";
-                string sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file
+                var sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file
                 da = new SqlDataAdapter(sql, conn);
-                SqlCommandBuilder cb = new SqlCommandBuilder(da);
+                var cb = new SqlCommandBuilder(da);
                 ds = new DataSet();
                 conn.Open();
                 da.Fill(ds, "PayData");
@@ -128,7 +136,7 @@ namespace PayTracker
                 bindingSource1.DataSource = ds;
                 bindingSource1.DataMember = "PayData";
                 dg1.DataSource = bindingSource1;
-                for (int i = 0; i < columns.Length; i++)
+                for (var i = 0; i < columns.Length; i++)
                 {
                     dg1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                     if (i > 4)
@@ -136,7 +144,7 @@ namespace PayTracker
                         dg1.Columns[i].DefaultCellStyle.Format = "N2";
                     }
                 }
-                dg1.Columns[0].ValueType = typeof(DateTime);
+                dg1.Columns[0].ValueType = typeof (DateTime);
                 formatGrid();
                 populateGrid();
                 dg1.ClearSelection();
@@ -171,21 +179,22 @@ namespace PayTracker
         {
             if (dg1.Rows.Count != 0)
             {
-                int safety = dg1.Rows.Count;
+                var safety = dg1.Rows.Count;
                 //dg1.Rows[dg1.Rows.Count - 1].Selected = true;
                 dg1.CurrentCell = dg1.Rows[safety - 1].Cells[0];
-                txtTHour.Text = String.Format(dg1.CurrentRow.Cells[7].Value.ToString(), "N2");
-                txtTPay.Text = String.Format(dg1.CurrentRow.Cells[8].Value.ToString(), "N2");
-                txtTPaid.Text = String.Format(dg1.CurrentRow.Cells[9].Value.ToString(), "N2");
-                txtBalance.Text = String.Format(dg1.CurrentRow.Cells[10].Value.ToString(), "N2");
+                txtTHour.Text = string.Format(dg1.CurrentRow.Cells[7].Value.ToString(), "N2");
+                txtTPay.Text = string.Format(dg1.CurrentRow.Cells[8].Value.ToString(), "N2");
+                txtTPaid.Text = string.Format(dg1.CurrentRow.Cells[9].Value.ToString(), "N2");
+                txtBalance.Text = string.Format(dg1.CurrentRow.Cells[10].Value.ToString(), "N2");
             }
         }
 
         private void dg1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            using (SolidBrush b = new SolidBrush(dg1.RowHeadersDefaultCellStyle.ForeColor))
+            using (var b = new SolidBrush(dg1.RowHeadersDefaultCellStyle.ForeColor))
             {
-                e.Graphics.DrawString((e.RowIndex + 1).ToString(), e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + 4);
+                e.Graphics.DrawString((e.RowIndex + 1).ToString(), e.InheritedRowStyle.Font, b,
+                    e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + 4);
             }
         }
 
@@ -198,12 +207,13 @@ namespace PayTracker
 
         private void getFileData()
         {
-            string connStr = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;Connect Timeout=30";
+            var connStr =
+                "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;Connect Timeout=30";
             conn = new SqlConnection(connStr);
             //string sql = "SELECT [Date],[Start],[Finish] FROM [PayData]";
-            string sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file
+            var sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file
             da = new SqlDataAdapter(sql, conn);
-            SqlCommandBuilder cb = new SqlCommandBuilder(da);
+            var cb = new SqlCommandBuilder(da);
             ds = new DataSet();
             conn.Open();
             da.Fill(ds, "PayData");
@@ -214,21 +224,21 @@ namespace PayTracker
             bindingSource1.DataMember = "PayData";
             dg1.DataSource = bindingSource1;
             dg1.ClearSelection();
-            StreamReader sr = new StreamReader("Pay.txt");
-            string record = sr.ReadLine();
+            var sr = new StreamReader("Pay.txt");
+            var record = sr.ReadLine();
             while (record != null)
             {
-                string[] temp = record.Split(',');
+                var temp = record.Split(',');
                 try
                 {
                     conn = new SqlConnection(connStr);
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand();
+                    var cmd = new SqlCommand();
                     cmd.Connection = conn;
                     sql = "SELECT [Date] FROM [PayData] WHERE [Date] = '" + temp[0] + "'";
                     cmd.CommandText = sql;
-                    DataRow dr = ds.Tables["PayData"].NewRow();
-                    SqlDataReader dataReader = cmd.ExecuteReader();
+                    var dr = ds.Tables["PayData"].NewRow();
+                    var dataReader = cmd.ExecuteReader();
 
                     if (dataReader.HasRows)
                     {
@@ -248,7 +258,7 @@ namespace PayTracker
                         dr["T-Pay"] = Convert.ToDouble(temp[8]);
                         dr["T-Paid"] = Convert.ToDouble(temp[9]);
                         dr["Balance"] = Convert.ToDouble(temp[10]);
-                        dg1.Columns[0].ValueType = typeof(DateTime);
+                        dg1.Columns[0].ValueType = typeof (DateTime);
                         ds.Tables["PayData"].Rows.Add(dr);
                         da.Update(ds, "PayData");
                         formatGrid();

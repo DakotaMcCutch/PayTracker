@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using PayTracker.Properties;
 
 namespace PayTracker
 {
@@ -17,15 +11,17 @@ namespace PayTracker
             InitializeComponent();
         }
 
-        void firstStart_FormClosing(object sender, FormClosingEventArgs e)
+        private void firstStart_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.ApplicationExitCall)
             {
                 return;
             }
-            if (System.Windows.Forms.MessageBox.Show(" Do you want to quit?          ", "Quit...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            if (
+                MessageBox.Show(" Do you want to quit?          ", "Quit...", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Properties.Settings.Default.Save();
+                Settings.Default.Save();
                 Dispose(true);
                 Application.Exit();
             }
@@ -37,34 +33,32 @@ namespace PayTracker
 
         public void setTheme()
         {
-            Button[] cmd = { cmdLocal, cmdMySql};
-            this.BackColor = Properties.Settings.Default.backColor;
-            this.ForeColor = Properties.Settings.Default.foreColor;
-            foreach (Button b in cmd)
+            Button[] cmd = {cmdLocal, cmdMySql};
+            BackColor = Settings.Default.backColor;
+            ForeColor = Settings.Default.foreColor;
+            foreach (var b in cmd)
             {
-                b.ForeColor = Properties.Settings.Default.buttonForeColor;
+                b.ForeColor = Settings.Default.buttonForeColor;
             }
         }
 
         private void cmdLocal_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.DatabaseType = "Local";
-            Properties.Settings.Default.FirstStart = false;
-            Properties.Settings.Default.Save();
-            this.Hide();
-            Start s = new Start();
+            Settings.Default.DatabaseType = "Local";
+            Settings.Default.FirstStart = false;
+            Settings.Default.Save();
+            Hide();
+            var s = new Start();
             s.Show();
-            
-
         }
 
         private void cmdMySql_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.DatabaseType = "MySql";
-            Properties.Settings.Default.FirstStart = false;
-            Properties.Settings.Default.Save();
-            this.Hide();
-            Start s = new Start();
+            Settings.Default.DatabaseType = "MySql";
+            Settings.Default.FirstStart = false;
+            Settings.Default.Save();
+            Hide();
+            var s = new Start();
             s.Show();
         }
 

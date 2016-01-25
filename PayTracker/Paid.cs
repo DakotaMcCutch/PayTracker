@@ -5,26 +5,27 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
+using PayTracker.Properties;
 
 namespace PayTracker
 {
     public partial class Paid : Form
     {
-        private SqlConnection conn = null;
-        private SqlDataAdapter da = null;
-        private DataSet ds = null;
-        private int rowIndex = -1;
+        private double balance;
+        private SqlConnection conn;
+        private SqlDataAdapter da;
         private string date = "";
-        private TimeSpan start;
+        private DataSet ds;
         private TimeSpan finish;
-        private double rate = 0.0;
         private TimeSpan hours;
-        private double pay = 0.0;
-        private double paid = 0.0;
+        private double paid;
+        private double pay;
+        private double rate;
+        private int rowIndex = -1;
+        private TimeSpan start;
         private double totalHours;
-        private double totalPay = 0.0;
-        private double totalPaid = 0.0;
-        private double balance = 0.0;
+        private double totalPaid;
+        private double totalPay;
 
         public Paid()
         {
@@ -58,23 +59,23 @@ namespace PayTracker
 
         public void setTheme()
         {
-            Button[] cmd = { cmdBack, cmdInsert, cmdUpdate, cmdDelete };
-            this.BackColor = Properties.Settings.Default.backColor;
-            this.ForeColor = Properties.Settings.Default.foreColor;
-            foreach (Button b in cmd)
+            Button[] cmd = {cmdBack, cmdInsert, cmdUpdate, cmdDelete};
+            BackColor = Settings.Default.backColor;
+            ForeColor = Settings.Default.foreColor;
+            foreach (var b in cmd)
             {
-                b.ForeColor = Properties.Settings.Default.buttonForeColor;
+                b.ForeColor = Settings.Default.buttonForeColor;
             }
-            dg1.ColumnHeadersDefaultCellStyle.BackColor = Properties.Settings.Default.headerBack;
-            dg1.ColumnHeadersDefaultCellStyle.ForeColor = Properties.Settings.Default.headerFore;
-            dg1.RowHeadersDefaultCellStyle.BackColor = Properties.Settings.Default.headerBack;
-            dg1.RowHeadersDefaultCellStyle.ForeColor = Properties.Settings.Default.headerFore;
-            dg1.RowHeadersDefaultCellStyle.SelectionBackColor = Properties.Settings.Default.selectionHeaderBack;
-            dg1.RowHeadersDefaultCellStyle.SelectionForeColor = Properties.Settings.Default.selectionHeaderFore;
-            dg1.DefaultCellStyle.BackColor = Properties.Settings.Default.cellBack;
-            dg1.DefaultCellStyle.ForeColor = Properties.Settings.Default.cellFore;
-            dg1.DefaultCellStyle.SelectionBackColor = Properties.Settings.Default.selectionCellBack;
-            dg1.DefaultCellStyle.SelectionForeColor = Properties.Settings.Default.selectionCellFore;
+            dg1.ColumnHeadersDefaultCellStyle.BackColor = Settings.Default.headerBack;
+            dg1.ColumnHeadersDefaultCellStyle.ForeColor = Settings.Default.headerFore;
+            dg1.RowHeadersDefaultCellStyle.BackColor = Settings.Default.headerBack;
+            dg1.RowHeadersDefaultCellStyle.ForeColor = Settings.Default.headerFore;
+            dg1.RowHeadersDefaultCellStyle.SelectionBackColor = Settings.Default.selectionHeaderBack;
+            dg1.RowHeadersDefaultCellStyle.SelectionForeColor = Settings.Default.selectionHeaderFore;
+            dg1.DefaultCellStyle.BackColor = Settings.Default.cellBack;
+            dg1.DefaultCellStyle.ForeColor = Settings.Default.cellFore;
+            dg1.DefaultCellStyle.SelectionBackColor = Settings.Default.selectionCellBack;
+            dg1.DefaultCellStyle.SelectionForeColor = Settings.Default.selectionCellFore;
         }
 
         private void dtpDate_ValueChanged(object sender, EventArgs e)
@@ -84,29 +85,34 @@ namespace PayTracker
 
         private void cmdBack_Click(object sender, EventArgs e)
         {
-            Start s = new Start();
+            var s = new Start();
             s.Show();
-            this.Hide();
+            Hide();
         }
 
         private void reCalc()
         {
             //dg1.Sort(dg1.Columns["Date"], ListSortDirection.Ascending);
-            int safety = dg1.Rows.Count;
+            var safety = dg1.Rows.Count;
             dg1.Rows[safety - 1].Selected = true;
-            for (int i = 0; i < dg1.Rows.Count; i++)
+            for (var i = 0; i < dg1.Rows.Count; i++)
             {
-                if ((i - 1) >= 0)
+                if (i - 1 >= 0)
                 {
-                    totalHours = TimeSpan.Parse(dg1.Rows[i].Cells[3].Value.ToString()).TotalHours + Convert.ToDouble(dg1.Rows[i - 1].Cells[7].Value.ToString());
-                    totalPay = Convert.ToDouble(dg1.Rows[i].Cells[5].Value.ToString()) + Convert.ToDouble(dg1.Rows[i - 1].Cells[8].Value.ToString());
-                    totalPaid = Convert.ToDouble(dg1.Rows[i].Cells[6].Value.ToString()) + Convert.ToDouble(dg1.Rows[i - 1].Cells[9].Value.ToString());
-                    balance = Convert.ToDouble(dg1.Rows[i].Cells[5].Value.ToString()) + Convert.ToDouble(dg1.Rows[i - 1].Cells[10].Value.ToString()) - Convert.ToDouble(dg1.Rows[i].Cells[6].Value.ToString());
+                    totalHours = TimeSpan.Parse(dg1.Rows[i].Cells[3].Value.ToString()).TotalHours +
+                                 Convert.ToDouble(dg1.Rows[i - 1].Cells[7].Value.ToString());
+                    totalPay = Convert.ToDouble(dg1.Rows[i].Cells[5].Value.ToString()) +
+                               Convert.ToDouble(dg1.Rows[i - 1].Cells[8].Value.ToString());
+                    totalPaid = Convert.ToDouble(dg1.Rows[i].Cells[6].Value.ToString()) +
+                                Convert.ToDouble(dg1.Rows[i - 1].Cells[9].Value.ToString());
+                    balance = Convert.ToDouble(dg1.Rows[i].Cells[5].Value.ToString()) +
+                              Convert.ToDouble(dg1.Rows[i - 1].Cells[10].Value.ToString()) -
+                              Convert.ToDouble(dg1.Rows[i].Cells[6].Value.ToString());
                     if (validInfo())
                     {
                         if (validPrimary("u"))
                         {
-                            DataRow dr = ds.Tables[0].Rows[i];
+                            var dr = ds.Tables[0].Rows[i];
                             dr["T-Hours"] = totalHours;
                             dr["T-Pay"] = totalPay;
                             dr["T-Paid"] = totalPaid;
@@ -124,22 +130,28 @@ namespace PayTracker
 
         private void cmdInsert_Click(object sender, EventArgs e)
         {
-            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Rate", "T-Pay", "T-Paid", "Balance" };
-            DateTimePicker[] dtp = { dtpDate, };
-            ArrayList a = new ArrayList { date, start, finish, hours, rate, pay, paid, totalHours, totalPay, totalPaid };
+            string[] columns =
+            {
+                "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Rate", "T-Pay",
+                "T-Paid", "Balance"
+            };
+            DateTimePicker[] dtp = {dtpDate};
+            var a = new ArrayList {date, start, finish, hours, rate, pay, paid, totalHours, totalPay, totalPaid};
             if (validInfo())
             {
                 if (validPrimary("i"))
                 {
-                    string connStr = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True";
-                    SqlConnection conn = new SqlConnection(connStr);
+                    var connStr =
+                        "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True";
+                    var conn = new SqlConnection(connStr);
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand();
+                    var cmd = new SqlCommand();
                     cmd.Connection = conn;
-                    string sql = "Select [Date], [Start], [Finish] FROM [PayData] WHERE [Date] = '" + dtpDate.Text.ToString() + "'AND [Paid]= '" + txtAmount.Text.ToString() + "'";
+                    var sql = "Select [Date], [Start], [Finish] FROM [PayData] WHERE [Date] = '" + dtpDate.Text +
+                              "'AND [Paid]= '" + txtAmount.Text + "'";
                     cmd.CommandText = sql;
-                    DataRow dr = ds.Tables["PayData"].NewRow();
-                    SqlDataReader dataReader = cmd.ExecuteReader();
+                    var dr = ds.Tables["PayData"].NewRow();
+                    var dataReader = cmd.ExecuteReader();
 
                     if (dataReader.HasRows)
                     {
@@ -175,14 +187,18 @@ namespace PayTracker
 
         private void cmdUpdate_Click(object sender, EventArgs e)
         {
-            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Pay", "T-Paid", "Balance" };
-            DateTimePicker[] dtp = { dtpDate };
+            string[] columns =
+            {
+                "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Pay", "T-Paid",
+                "Balance"
+            };
+            DateTimePicker[] dtp = {dtpDate};
 
             if (validInfo())
             {
                 if (validPrimary("u"))
                 {
-                    DataRow dr = ds.Tables[0].Rows[rowIndex];
+                    var dr = ds.Tables[0].Rows[rowIndex];
                     calc();
                     dr["Date"] = date;
                     dr["Start"] = start;
@@ -209,7 +225,10 @@ namespace PayTracker
         {
             try
             {
-                if (MessageBox.Show("Are you sure you want to delete this entry?", "Confirm Entry Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                if (
+                    MessageBox.Show("Are you sure you want to delete this entry?", "Confirm Entry Delete",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) ==
+                    DialogResult.Yes)
                 {
                     ds.Tables[0].Rows[rowIndex].Delete();
                     da.Update(ds, "PayData");
@@ -241,32 +260,37 @@ namespace PayTracker
         {
             if (state.Equals("i"))
             {
-                for (int i = 0; i < dg1.Rows.Count; i++)
+                for (var i = 0; i < dg1.Rows.Count; i++)
                 {
-                    if ((dtpDate.Text.Equals(dg1.Rows[i].Cells[0].Value.ToString())) && (txtAmount.Text.Equals(dg1.Rows[i].Cells[1].Value.ToString())))
+                    if (dtpDate.Text.Equals(dg1.Rows[i].Cells[0].Value.ToString()) &&
+                        txtAmount.Text.Equals(dg1.Rows[i].Cells[1].Value.ToString()))
                     {
-                        MessageBox.Show("Entry Exists Already.", "Primary Key Violation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Entry Exists Already.", "Primary Key Violation", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
                         dtpDate.Focus();
                         return false;
                     }
                 }
                 return true;
             }
-            else if (state.Equals("u"))
+            if (state.Equals("u"))
             {
-                for (int i = 0; i < dg1.Rows.Count; i++)
+                for (var i = 0; i < dg1.Rows.Count; i++)
                 {
                     if (i != dg1.CurrentRow.Index)
                     {
-                        if ((dtpDate.Text.Equals(dg1.Rows[i].Cells[0].Value.ToString())) && (txtAmount.Text.Equals(dg1.Rows[i].Cells[1].Value.ToString())))
+                        if (dtpDate.Text.Equals(dg1.Rows[i].Cells[0].Value.ToString()) &&
+                            txtAmount.Text.Equals(dg1.Rows[i].Cells[1].Value.ToString()))
                         {
-                            MessageBox.Show("Entry Exists Already.", "Primary Key Violation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Entry Exists Already.", "Primary Key Violation", MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
                             dtpDate.Focus();
                             return false;
                         }
-                        else if ((dtpDate.Text.Equals("")) || (txtAmount.Text.Equals("")))
+                        if (dtpDate.Text.Equals("") || txtAmount.Text.Equals(""))
                         {
-                            MessageBox.Show("No Entry Selected!", "Update Record Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("No Entry Selected!", "Update Record Error", MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
                             if (dtpDate.Text.Equals(""))
                             {
                                 dtpDate.Focus();
@@ -289,7 +313,9 @@ namespace PayTracker
             {
                 return;
             }
-            if (System.Windows.Forms.MessageBox.Show(" Do you want to quit?          ", "Quit...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            if (
+                MessageBox.Show(" Do you want to quit?          ", "Quit...", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Dispose(true);
                 Application.Exit();
@@ -302,15 +328,20 @@ namespace PayTracker
 
         private void getData()
         {
-            string[] columns = { "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Pay", "T-Paid", "Balance" };
-            string connStr = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;";
+            string[] columns =
+            {
+                "Date", "Start", "Finish", "Hours", "Rate", "Pay", "Paid", "T-Hours", "T-Pay", "T-Paid",
+                "Balance"
+            };
+            var connStr =
+                "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;";
             try
             {
                 conn = new SqlConnection(connStr);
                 //string sql = "SELECT [Date],[Start],[Finish] FROM [PayData]";
-                string sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file
+                var sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file
                 da = new SqlDataAdapter(sql, conn);
-                SqlCommandBuilder cb = new SqlCommandBuilder(da);
+                var cb = new SqlCommandBuilder(da);
                 ds = new DataSet();
                 conn.Open();
                 da.Fill(ds, "PayData");
@@ -320,7 +351,7 @@ namespace PayTracker
                 bindingSource1.DataSource = ds;
                 bindingSource1.DataMember = "PayData";
                 dg1.DataSource = bindingSource1;
-                for (int i = 0; i < columns.Length; i++)
+                for (var i = 0; i < columns.Length; i++)
                 {
                     dg1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                     if (i == 1 || i == 2 || i == 3 || i == 4)
@@ -332,7 +363,7 @@ namespace PayTracker
                         dg1.Columns[i].DefaultCellStyle.Format = "N2";
                     }
                 }
-                dg1.Columns[0].ValueType = typeof(DateTime);
+                dg1.Columns[0].ValueType = typeof (DateTime);
                 formatGrid();
                 dg1.ClearSelection();
                 setControlState("i");
@@ -370,7 +401,7 @@ namespace PayTracker
                 dg1.CurrentRow.Selected = true;
                 rowIndex = dg1.CurrentRow.Index;
 
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                for (var i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
                     if (ds.Tables[0].Rows[i].RowState != DataRowState.Deleted)
                     {
@@ -381,7 +412,7 @@ namespace PayTracker
                         }
                     }
                 }
-                dtpDate.Value = Convert.ToDateTime((dg1.CurrentRow.Cells[0].Value.ToString()));
+                dtpDate.Value = Convert.ToDateTime(dg1.CurrentRow.Cells[0].Value.ToString());
                 txtAmount.Text = dg1.CurrentRow.Cells[6].Value.ToString();
                 setControlState("u/d");
             }
@@ -389,15 +420,16 @@ namespace PayTracker
 
         private void dg1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            using (SolidBrush b = new SolidBrush(dg1.RowHeadersDefaultCellStyle.ForeColor))
+            using (var b = new SolidBrush(dg1.RowHeadersDefaultCellStyle.ForeColor))
             {
-                e.Graphics.DrawString((e.RowIndex + 1).ToString(), e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + 4);
+                e.Graphics.DrawString((e.RowIndex + 1).ToString(), e.InheritedRowStyle.Font, b,
+                    e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + 4);
             }
         }
 
         private void calc()
         {
-            int rowCount = Convert.ToInt32(dg1.Rows.Count);
+            var rowCount = Convert.ToInt32(dg1.Rows.Count);
             if (rowCount > 0)
             {
                 rowCount = Convert.ToInt32(dg1.Rows.Count - 1);
@@ -410,7 +442,7 @@ namespace PayTracker
                 hours = finish - start;
                 rate = 0.00;
                 pay = 0.00;
-                paid = Convert.ToDouble(txtAmount.Text.ToString());
+                paid = Convert.ToDouble(txtAmount.Text);
                 totalHours = hours.TotalHours;
                 totalPay = pay;
                 totalPaid = paid;
@@ -424,7 +456,7 @@ namespace PayTracker
                 hours = start - finish;
                 rate = 0.00;
                 pay = 0.00;
-                paid = Convert.ToDouble(txtAmount.Text.ToString());
+                paid = Convert.ToDouble(txtAmount.Text);
                 totalHours = hours.TotalHours;
                 totalPay = pay;
                 totalPaid = paid;

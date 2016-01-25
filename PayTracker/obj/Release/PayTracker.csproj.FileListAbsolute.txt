@@ -19,3 +19,6 @@ D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.Data.resources
 D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.firstStart.resources
 D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.exe.manifest
 D:\DEV\PayTracker\PayTracker\obj\Release\PayTracker.application
+C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\bin\Release\PayTracker.exe.config
+C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Release\PayTracker.exe
+C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Release\PayTracker.pdb
