@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -119,7 +119,7 @@ namespace PayTracker
                 "Balance"
             };
             var connStr =
-                "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;";
+                "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;";
             try
             {
                 conn = new SqlConnection(connStr);
@@ -208,7 +208,7 @@ namespace PayTracker
         private void getFileData()
         {
             var connStr =
-                "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;Connect Timeout=30";
+                "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;Connect Timeout=30";
             conn = new SqlConnection(connStr);
             //string sql = "SELECT [Date],[Start],[Finish] FROM [PayData]";
             var sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file

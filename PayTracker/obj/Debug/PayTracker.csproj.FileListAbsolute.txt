@@ -42,3 +42,22 @@ C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\ob
 C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.TrustInfo.xml
 C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.exe.manifest
 C:\Users\mccutdak\Documents\Visual Studio 2013\Projects\PayTracker\PayTracker\obj\Debug\PayTracker.application
+C:\Projects\Personal\Paytracker\PayTracker\bin\Debug\App.config
+C:\Projects\Personal\Paytracker\PayTracker\bin\Debug\Data.mdf
+C:\Projects\Personal\Paytracker\PayTracker\bin\Debug\Data_log.ldf
+C:\Projects\Personal\Paytracker\PayTracker\bin\Debug\Pay.txt
+C:\Projects\Personal\Paytracker\PayTracker\bin\Debug\PayTracker.exe.config
+C:\Projects\Personal\Paytracker\PayTracker\bin\Debug\PayTracker.exe
+C:\Projects\Personal\Paytracker\PayTracker\bin\Debug\PayTracker.pdb
+C:\Projects\Personal\Paytracker\PayTracker\bin\Debug\MySql.Data.dll
+C:\Projects\Personal\Paytracker\PayTracker\obj\Debug\PayTracker.Data.resources
+C:\Projects\Personal\Paytracker\PayTracker\obj\Debug\PayTracker.firstStart.resources
+C:\Projects\Personal\Paytracker\PayTracker\obj\Debug\PayTracker.Hours.resources
+C:\Projects\Personal\Paytracker\PayTracker\obj\Debug\PayTracker.Paid.resources
+C:\Projects\Personal\Paytracker\PayTracker\obj\Debug\PayTracker.Properties.Resources.resources
+C:\Projects\Personal\Paytracker\PayTracker\obj\Debug\PayTracker.Start.resources
+C:\Projects\Personal\Paytracker\PayTracker\obj\Debug\PayTracker.csproj.GenerateResource.cache
+C:\Projects\Personal\Paytracker\PayTracker\obj\Debug\PayTracker.csproj.CoreCompileInputs.cache
+C:\Projects\Personal\Paytracker\PayTracker\obj\Debug\PayTracker.csproj.CopyComplete
+C:\Projects\Personal\Paytracker\PayTracker\obj\Debug\PayTracker.exe
+C:\Projects\Personal\Paytracker\PayTracker\obj\Debug\PayTracker.pdb

@@ -1,4 +1,4 @@
-﻿namespace PayTracker
+namespace PayTracker
 {
     partial class Start
     {
@@ -67,6 +67,7 @@
             this.lblTop.TabIndex = 54;
             this.lblTop.Text = "Please select the mode that you want to enter";
             this.lblTop.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblTop.Click += new System.EventHandler(this.lblTop_Click);
             // 
             // cbTheme
             // 

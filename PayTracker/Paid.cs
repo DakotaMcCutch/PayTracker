@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Data;
@@ -142,7 +142,7 @@ namespace PayTracker
                 if (validPrimary("i"))
                 {
                     var connStr =
-                        "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True";
+                        "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True";
                     var conn = new SqlConnection(connStr);
                     conn.Open();
                     var cmd = new SqlCommand();
@@ -334,7 +334,7 @@ namespace PayTracker
                 "Balance"
             };
             var connStr =
-                "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;";
+                "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;";
             try
             {
                 conn = new SqlConnection(connStr);

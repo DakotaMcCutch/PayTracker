@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -300,7 +300,7 @@ namespace PayTracker
                 if (validPrimary("i"))
                 {
                     var connStr =
-                        "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;";
+                        "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;";
                     var conn = new SqlConnection(connStr);
                     conn.Open();
                     var cmd = new SqlCommand();
@@ -370,7 +370,7 @@ namespace PayTracker
                     dr["Date"] = date;
                     dr["Start"] = start;
                     dr["Finish"] = finish;
-                    dr["Hours"] = hours.TotalHours;
+                    dr["Hours"] = hours;
                     dr["Rate"] = rate;
                     dr["Pay"] = pay;
                     dr["Paid"] = paid;
@@ -461,7 +461,7 @@ namespace PayTracker
             };
             //string connStr = "server=192.168.2.39;user id=Owner;password=qwerty;database=Data;persistsecurityinfo=True;allowuservariables=True";
             var connStr =
-                "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;";
+                "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;";
             try
             {
                 conn = new SqlConnection(connStr);
@@ -574,7 +574,7 @@ namespace PayTracker
         private void getFileData()
         {
             var connStr =
-                "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;Connect Timeout=30";
+                "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|Data.mdf;Integrated Security=True;Connect Timeout=30";
             conn = new SqlConnection(connStr);
             //string sql = "SELECT [Date],[Start],[Finish] FROM [PayData]";
             var sql = "SELECT * FROM [PayData]"; //uncomment when uploading from file

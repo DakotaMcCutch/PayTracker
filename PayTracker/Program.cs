@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 using PayTracker.Properties;
 
@@ -14,6 +14,10 @@ namespace PayTracker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //if (System.Diagnostics.Debugger.IsAttached)
+            //{
+            //    Settings.Default.Reset();
+            //}
             if (Settings.Default.FirstStart)
             {
                 Application.Run(new firstStart());

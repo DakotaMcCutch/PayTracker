@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using PayTracker.Properties;
@@ -124,6 +124,11 @@ namespace PayTracker
             Hide();
             var d = new Data();
             d.Show();
+        }
+
+        private void lblTop_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
